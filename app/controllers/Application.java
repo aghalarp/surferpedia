@@ -7,6 +7,7 @@ import views.html.Page1;
 import views.html.Souza;
 import views.html.Brooke;
 import views.html.Ivarra;
+import views.html.kalanid;
 
 /**
  * Implements the controllers for this application.
@@ -54,6 +55,15 @@ public class Application extends Controller {
    */
   public static Result ivarra() {
     return ok(Ivarra.render("Welcome to Page1."));
+    
+  }
+  
+  /**
+   * Returns Ivarra's bio page.
+   * @return The Ivarra page.
+   */
+  public static Result kalanid() {
+    return ok(kalanid.render("Welcome to Page1."));
     
   }
 }
