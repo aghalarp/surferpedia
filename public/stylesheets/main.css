@@ -1,0 +1,32 @@
+body {
+
+}
+
+.header {
+  background: url('../images/header.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+}
+
+
+.souza-image {
+  background: url('../images/souza.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.brooke-image {
+  background: url('../images/brooke.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.ivarra-image {
+  background: url('../images/ivarra.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
