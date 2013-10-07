@@ -37,3 +37,10 @@ body {
   background-position: center;
   height: 500px;
 }
+
+.john-image {
+  background: url('../images/john-mel.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}

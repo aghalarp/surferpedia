@@ -8,6 +8,7 @@ import views.html.Souza;
 import views.html.Brooke;
 import views.html.Ivarra;
 import views.html.kalanid;
+import views.html.John;
 
 /**
  * Implements the controllers for this application.
@@ -64,6 +65,15 @@ public class Application extends Controller {
    */
   public static Result kalanid() {
     return ok(kalanid.render("Welcome to Page1."));
+    
+  }
+  
+  /**
+   * Returns John's bio page.
+   * @return The John page.
+   */
+  public static Result john() {
+    return ok(John.render("Welcome to Page1."));
     
   }
 }
