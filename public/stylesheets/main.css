@@ -44,3 +44,10 @@ body {
   background-position: center;
   height: 500px;
 }
+
+.kyuss-image {
+  background: url('../images/kyuss.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}

@@ -9,6 +9,8 @@ import views.html.Brooke;
 import views.html.Ivarra;
 import views.html.kalanid;
 import views.html.John;
+import views.html.kyuss;
+
 
 /**
  * Implements the controllers for this application.
@@ -74,6 +76,15 @@ public class Application extends Controller {
    */
   public static Result john() {
     return ok(John.render("Welcome to Page1."));
+    
+  }
+  
+  /**
+   * Returns Kyuss' bio page.
+   * @return The Kyuss page.
+   */
+  public static Result kyuss() {
+    return ok(kyuss.render("Welcome to Page1."));
     
   }
 }
