@@ -31,13 +31,6 @@ body {
   height: 500px;
 }
 
-.kalani-image {
-  background: url('../images/kd.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 500px;
-}
-
 .john-image {
   background: url('../images/john-mel.jpg');
   background-size: cover;
