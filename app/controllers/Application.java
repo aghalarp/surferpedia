@@ -3,13 +3,11 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Index;
-import views.html.Page1;
 import views.html.Souza;
 import views.html.Brooke;
 import views.html.Ivarra;
-import views.html.kalanid;
 import views.html.John;
-import views.html.kyuss;
+import views.html.Kyuss;
 
 
 /**
@@ -22,16 +20,7 @@ public class Application extends Controller {
    * @return The resulting home page. 
    */
   public static Result index() {
-    return ok(Index.render("Welcome to the home page."));
-  }
-  
-  /**
-   * Returns page1, a simple example of a second page to illustrate navigation.
-   * @return The Page1.
-   */
-  public static Result page1() {
-    return ok(Page1.render("Welcome to Page1."));
-    
+    return ok(Index.render(""));
   }
   
   /**
@@ -39,7 +28,7 @@ public class Application extends Controller {
    * @return The Souza page
    */
   public static Result souza() {
-    return ok(Souza.render("Welcome to Page1."));
+    return ok(Souza.render(""));
     
   }
   
@@ -48,7 +37,7 @@ public class Application extends Controller {
    * @return The Brooke page.
    */
   public static Result brooke() {
-    return ok(Brooke.render("Welcome to Page1."));
+    return ok(Brooke.render(""));
     
   }
   
@@ -57,16 +46,7 @@ public class Application extends Controller {
    * @return The Ivarra page.
    */
   public static Result ivarra() {
-    return ok(Ivarra.render("Welcome to Page1."));
-    
-  }
-  
-  /**
-   * Returns Ivarra's bio page.
-   * @return The Ivarra page.
-   */
-  public static Result kalanid() {
-    return ok(kalanid.render("Welcome to Page1."));
+    return ok(Ivarra.render(""));
     
   }
   
@@ -75,7 +55,7 @@ public class Application extends Controller {
    * @return The John page.
    */
   public static Result john() {
-    return ok(John.render("Welcome to Page1."));
+    return ok(John.render(""));
     
   }
   
@@ -84,7 +64,7 @@ public class Application extends Controller {
    * @return The Kyuss page.
    */
   public static Result kyuss() {
-    return ok(kyuss.render("Welcome to Page1."));
+    return ok(Kyuss.render(""));
     
   }
 }
