@@ -1,4 +1,4 @@
-@(page: String)(content: Html)
+@(page: String, surferList: List[Surfer])(content: Html)
 
 <!DOCTYPE html>
 
@@ -20,7 +20,8 @@
     </head>
     <body>
     
-   <div class="header"></div>
+    <div class="header hidden-xs"></div>
+   
      <!-- Responsive navbar -->
   <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
@@ -37,25 +38,39 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Males <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.Application.souza()">Adriano de Souza</a></li>
+            @for(surfer <- surferList) {
+              @if(surfer.getSurferType() == "Male") {
+                  <li><a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a></li>
+              }
+            }
             </ul>
           </li>
           
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Females <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.Application.brooke()">Serena Brooke</a></li>
+            @for(surfer <- surferList) {
+              @if(surfer.getSurferType() == "Female") {
+                  <li><a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a></li>
+              }
+            }
             </ul>
           </li>
           
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Groms <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="@routes.Application.ivarra()">Elliot Ivarra</a></li>
-              <li><a href="@routes.Application.john()">John Mel</a></li>
-              <li><a href="@routes.Application.kyuss()">Kyuss King</a></li>
+            @for(surfer <- surferList) {
+              @if(surfer.getSurferType() == "Grom") {
+                  <li><a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a></li>
+              }
+            }
             </ul>
           </li>
+        
+          
+          
+          <li class="@("active".when(page == "ManageSurfer"))"><a href="@routes.Application.newSurfer()">New</a></li>
         </ul>
         
       </div>

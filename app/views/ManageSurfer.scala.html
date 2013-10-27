@@ -1,0 +1,61 @@
+@(surferForm: Form[views.formdata.SurferFormData], surferTypeMap: Map[String, Boolean], surferList: List[Surfer])
+
+@import helper._
+@import bootstrap3._
+
+@Main("ManageSurfer", surferList) {
+<div class="container">
+  @form(routes.Application.postSurfer(), 'class -> "form-horizontal") {
+    
+    @hidden(surferForm("isEditable"))
+    
+    @text(surferForm("name"),
+        label = "Name",
+        placeholder = "Name",
+        help = "The name of the surfer.")
+        
+    @text(surferForm("home"),
+        label = "Home",
+        placeholder = "Home",
+        help = "Where the surfer hails from.")
+        
+    @text(surferForm("awards"),
+        label = "Awards",
+        placeholder = "Awards",
+        help = "List titles and other surfing awards.")
+    
+    @text(surferForm("carouselImgUrl"),
+        label = "Carousel URL",
+        placeholder = "Carousel URL",
+        help = "A URL to the picture to be presented in the home page carousel for this surfer.")
+    
+    @text(surferForm("bioImgUrl"),
+        label = "Bio URL",
+        placeholder = "Bio URL",
+        help = "A URL to the picture to be presented in the bio page for this surfer.")
+    
+    @bootstrap3.textarea(surferForm("biography"),
+        label = "Bio",
+        rows = "5",
+        placeholder = "Bio statement goes here.",
+        help = "One paragraph description of this surfer.")
+    
+    @bootstrap3.slug(surferForm("slug"),
+        label = "Slug",
+        placeholder = "Slug",
+        help = "Letters and digits to be used to identify this surfer in URLs, i.e. http://surferpedia.com/surfer/kellyslater")
+    
+    @bootstrap3.select(surferForm("surferType"),
+        label = "Type",
+        optionMap = surferTypeMap,
+        isMultiple = false,
+        help = "The type of surfer for placement in the menubar.")
+    
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Add</button>
+      </div>
+    </div>
+  }
+</div>
+}

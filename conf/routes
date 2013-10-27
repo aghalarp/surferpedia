@@ -4,11 +4,11 @@
 
 # Home page
 GET     /                            controllers.Application.index()
-GET     /souza                       controllers.Application.souza()
-GET     /brooke                      controllers.Application.brooke()
-GET     /ivarra                      controllers.Application.ivarra()
-GET     /john                        controllers.Application.john()
-GET     /kyuss                       controllers.Application.kyuss() 
+GET     /new                         controllers.Application.newSurfer()
+GET     /surfer/:slug                controllers.Application.getSurfer(slug)
+GET     /surfer/:slug/delete         controllers.Application.deleteSurfer(slug)
+GET     /surfer/:slug/edit           controllers.Application.manageSurfer(slug)
+POST    /post                        controllers.Application.postSurfer()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

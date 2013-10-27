@@ -10,36 +10,7 @@ body {
 }
 
 
-.souza-image {
-  background: url('../images/souza.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 500px;
-}
-
-.brooke-image {
-  background: url('../images/brooke.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 500px;
-}
-
-.ivarra-image {
-  background: url('../images/ivarra.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 500px;
-}
-
-.john-image {
-  background: url('../images/john-mel.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 500px;
-}
-
-.kyuss-image {
-  background: url('../images/kyuss.jpg');
+.bio-image {
   background-size: cover;
   background-position: center;
   height: 500px;

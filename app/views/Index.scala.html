@@ -1,54 +1,42 @@
-@(message: String)
+@(surferList: List[Surfer])
 
-@Main("Home") {
+@Main("Home", surferList) {
   <div class="container">
-    <div id="carousel-example-generic" class="carousel slide">
+    <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+        @for((surfer, index) <- surferList.zipWithIndex) {
+          @if(index == 0) {
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          } else {
+            <li data-target="#carousel-example-generic" data-slide-to="@index"></li>
+          }
+        }
+        
       </ol>
   
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         
-        <div class="item active">
-          <div class="souza-image"></div>
-          <div class="carousel-caption">
-            <h3>Adriano de Souza</h3>
-          </div>
-        </div>
+        @for((surfer, index) <- surferList.zipWithIndex) {
+          @if(index == 0) {
+            <div class="item active">
+              <div class="bio-image" style="background-image: url('@surfer.getCarouselImgUrl()');"></div>
+              <div class="carousel-caption">
+                <h3>@surfer.getName()</h3>
+              </div>
+            </div>
+          } else {
+            <div class="item">
+              <div class="bio-image" style="background-image: url('@surfer.getCarouselImgUrl()');"></div>
+              <div class="carousel-caption">
+                <h3>@surfer.getName()</h3>
+              </div>
+            </div>
+          }
+          
+        }
         
-        <div class="item">
-          <div class="brooke-image"></div>
-          <div class="carousel-caption">
-            <h3>Serena Brooke</h3>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="ivarra-image"></div>
-          <div class="carousel-caption">
-            <h3>Elliot Ivarra</h3>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="john-image"></div>
-          <div class="carousel-caption">
-            <h3>John Mel</h3>
-          </div>
-        </div>
-        
-        <div class="item">
-          <div class="kyuss-image"></div>
-          <div class="carousel-caption">
-            <h3>Kyuss King</h3>
-          </div>
-        </div>
         
       </div>
       
