@@ -1,10 +1,10 @@
-![screenshot](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-homepage.png)
+![screenshot](https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-homepage.png)
 
-![screenshot](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-newsurfer.png)
+![screenshot](https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-newsurfer.png)
 
-![screenshot](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-surferpage.png)
+![screenshot](https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-surferpage.png)
 
-![screenshot](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-editsurfer.png)
+![screenshot](https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-editsurfer.png)
 
 Overview
 --------
