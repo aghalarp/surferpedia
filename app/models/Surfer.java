@@ -14,7 +14,7 @@ public class Surfer {
   private String bioImgUrl;
   private String biography;
   private String surferType; //Male, Female, or Grom
-  private Boolean isEditable = false;
+  private Boolean isEditable = false; 
   
   
   /**
