@@ -77,11 +77,13 @@ public class SurferDB {
     if (surfer == null) {
       throw new RuntimeException("Passed an invalid slug: " + slug);
     }
-    else {
-      surfers.remove(slug);
-      
+    else { 
       //Update event database.
       UpdateDB.addUpdate("Delete", getSurfer(slug).getName());
+      //Then remove surfer.
+      surfers.remove(slug);
+      
+      
     }
   }
 }
