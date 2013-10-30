@@ -37,7 +37,7 @@ public class Application extends Controller {
     SurferFormData data = new SurferFormData(); //Create empty surferFormData object
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data); //Then fill it with form data.
     Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType); //Note: I think we can use empty param.
-    List<String> footstyleTypeList = FootstyleTypes.getTypes(data.footstyleType);
+    List<String> footstyleTypeList = FootstyleTypes.getTypes();
     return ok(ManageSurfer.render(formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
   }
   
@@ -50,7 +50,7 @@ public class Application extends Controller {
     SurferFormData data = new SurferFormData(SurferDB.getSurfer(slug)); //Create new but existing surferFormData object
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
     Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
-    List<String> footstyleTypeList = FootstyleTypes.getTypes(data.footstyleType);
+    List<String> footstyleTypeList = FootstyleTypes.getTypes();
     return ok(ManageSurfer.render(formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
   }
   
@@ -92,7 +92,7 @@ public class Application extends Controller {
       SurferDB.addSurfer(data);
       
       Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
-      List<String> footstyleTypeList = FootstyleTypes.getTypes(data.footstyleType);
+      List<String> footstyleTypeList = FootstyleTypes.getTypes();
       return ok(ManageSurfer.render(formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
     }
     
