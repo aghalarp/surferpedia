@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.Map;
 import models.SurferDB;
+import models.UpdateDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -10,6 +11,7 @@ import views.formdata.SurferTypes;
 import views.html.Index;
 import views.html.ManageSurfer;
 import views.html.ShowSurfer;
+import views.html.Updates;
 
 
 /**
@@ -73,6 +75,15 @@ public class Application extends Controller {
       SurferFormData data = formData.get(); //Creates the object we made (SurferFormData) and fills with get data
       //Add to database
       SurferDB.addSurfer(data);
+      
+      //Create Update event. Note, should consider moving this to SurferDB addSurfer method
+      if (!data.isEditable) { //If isEditable set to false, then its a new surfer.
+        UpdateDB.addUpdate("Create", data.name);
+      }
+      else {
+        UpdateDB.addUpdate("Edit", data.name);
+      }
+      
       Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
       return ok(ManageSurfer.render(formData, surferTypeMap, SurferDB.getSurfers()));
     }
@@ -95,7 +106,16 @@ public class Application extends Controller {
    */
   public static Result deleteSurfer(String slug) {
     SurferDB.deleteSurfer(slug);
+    //Note, UpdateDB delete event is done in SurferDB.deleteSurfer() method. Could also move that code here...
     
     return ok(Index.render(SurferDB.getSurfers()));
+  }
+  
+  /**
+   * Returns the show updates page.
+   * @return The updates page.
+   */
+  public static Result getUpdates() {
+    return ok(Updates.render(UpdateDB.getUpdates(), SurferDB.getSurfers()));
   }
 }

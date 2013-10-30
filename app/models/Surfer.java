@@ -28,6 +28,7 @@ public class Surfer {
    * @param bioImgUrl The URL to the image to be used in the surfer biography page.
    * @param biography The biography text.
    * @param surferType Set to Male, Female, or Grom.
+   * @param isEditable If surfer is editable.
    */
   public Surfer(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl, 
                  String biography, String surferType, Boolean isEditable) {

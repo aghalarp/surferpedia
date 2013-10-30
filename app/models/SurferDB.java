@@ -79,6 +79,9 @@ public class SurferDB {
     }
     else {
       surfers.remove(slug);
+      
+      //Update event database.
+      UpdateDB.addUpdate("Delete", getSurfer(slug).getName());
     }
   }
 }
