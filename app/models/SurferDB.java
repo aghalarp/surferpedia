@@ -23,7 +23,8 @@ public class SurferDB {
   public static Surfer addSurfer(SurferFormData formData) {
     
     Surfer surfer = new Surfer(formData.slug, formData.name, formData.home, formData.awards, 
-        formData.carouselImgUrl, formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable);
+        formData.carouselImgUrl, formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable, 
+        formData.footstyleType);
     
     surfers.put(formData.slug, surfer);
     

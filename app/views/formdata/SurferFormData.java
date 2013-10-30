@@ -31,6 +31,8 @@ public class SurferFormData {
   public String surferType = "";
   /** The isEditable hidden form field. For seeing if allowed to edit */
   public boolean isEditable = false;
+  /** The footstyleType form field. */
+  public String footstyleType = "";
   
   /**
    * Default constructor, required by Play.
@@ -53,9 +55,10 @@ public class SurferFormData {
    * @param biography The biography text.
    * @param surferType Set to Male, Female, or Grom.
    * @param isEditable Indicates if Surfer is editable.
+   * @param footstyleType Either Regular or Goofy.
    */
   public SurferFormData(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl, 
-      String biography, String surferType, Boolean isEditable) {
+      String biography, String surferType, Boolean isEditable, String footstyleType) {
     
     this.slug = slug;
     this.name = name;
@@ -66,6 +69,7 @@ public class SurferFormData {
     this.biography = biography;
     this.surferType = surferType;
     this.isEditable = isEditable;
+    this.footstyleType = footstyleType;
   }
   
   /**
@@ -82,6 +86,7 @@ public class SurferFormData {
     this.biography = surfer.getBiography();
     this.surferType = surfer.getSurferType();
     this.isEditable = surfer.getIsEditable();
+    this.footstyleType = surfer.getFootstyleType();
   }
     
   
@@ -134,6 +139,10 @@ public class SurferFormData {
     
     if (!SurferTypes.isType(surferType)) {
       errors.add(new ValidationError("surferType", "Surfer type is invalid."));
+    }
+    
+    if (!FootstyleTypes.isType(footstyleType)) {
+      errors.add(new ValidationError("footstyleType", "Footstyle type is invalid."));
     }
     
     if(isEditable == false && errors.isEmpty()) {

@@ -14,7 +14,8 @@ public class Surfer {
   private String bioImgUrl;
   private String biography;
   private String surferType; //Male, Female, or Grom
-  private Boolean isEditable = false; 
+  private Boolean isEditable = false;
+  private String footstyleType; //Regular or Goofy
   
   
   /**
@@ -29,9 +30,10 @@ public class Surfer {
    * @param biography The biography text.
    * @param surferType Set to Male, Female, or Grom.
    * @param isEditable If surfer is editable.
+   * @param footstyleType Regular or Goofy.
    */
   public Surfer(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl, 
-                 String biography, String surferType, Boolean isEditable) {
+                 String biography, String surferType, Boolean isEditable, String footstyleType) {
     
     this.slug = slug;
     this.name = name;
@@ -42,6 +44,7 @@ public class Surfer {
     this.biography = biography;
     this.surferType = surferType;
     this.isEditable = isEditable;
+    this.footstyleType = footstyleType;
   }
   
   
@@ -151,6 +154,22 @@ public class Surfer {
    */
   public void setIsEditable(Boolean isEditable) {
     this.isEditable = isEditable;
+  }
+
+
+  /**
+   * @return the footstyleType
+   */
+  public String getFootstyleType() {
+    return footstyleType;
+  }
+
+
+  /**
+   * @param footstyleType the footstyleType to set
+   */
+  public void setFootstyleType(String footstyleType) {
+    this.footstyleType = footstyleType;
   }
   
   
