@@ -73,16 +73,18 @@ public class Application extends Controller {
     }
     else {
       SurferFormData data = formData.get(); //Creates the object we made (SurferFormData) and fills with get data
-      //Add to database
-      SurferDB.addSurfer(data);
+      
       
       //Create Update event. Note, should consider moving this to SurferDB addSurfer method
-      if (!data.isEditable) { //If isEditable set to false, then its a new surfer.
+      if (!SurferDB.slugExists(data.slug)) { //If slug does not exist yet in DB, it must be a new event
         UpdateDB.addUpdate("Create", data.name);
       }
       else {
         UpdateDB.addUpdate("Edit", data.name);
       }
+      
+    //Add to database
+      SurferDB.addSurfer(data);
       
       Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
       return ok(ManageSurfer.render(formData, surferTypeMap, SurferDB.getSurfers()));
