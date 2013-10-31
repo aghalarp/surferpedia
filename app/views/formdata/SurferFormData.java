@@ -96,6 +96,7 @@ public class SurferFormData {
    * The Awards field is optional. It can be empty.
    * The Slug field must be alphanumeric, and must be unique.
    * The SurferType field must be either "Male", "Female", or "Grom".
+   * The footstyleType field must be either "Regular" or "Goofy".
    * 
    * 
    * @return null if no errors, list of ValidationErrors if errors.

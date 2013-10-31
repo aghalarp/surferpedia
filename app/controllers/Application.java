@@ -79,7 +79,6 @@ public class Application extends Controller {
     else {
       SurferFormData data = formData.get(); //Creates the object we made (SurferFormData) and fills with get data
       
-      
       //Create Update event. Note, should consider moving this to SurferDB addSurfer method
       if (!SurferDB.slugExists(data.slug)) { //If slug does not exist yet in DB, it must be a new event
         UpdateDB.addUpdate("Create", data.name);
@@ -88,7 +87,7 @@ public class Application extends Controller {
         UpdateDB.addUpdate("Edit", data.name);
       }
       
-    //Add to database
+      //Add to database
       SurferDB.addSurfer(data);
       
       Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
@@ -120,7 +119,7 @@ public class Application extends Controller {
   }
   
   /**
-   * Returns the show updates page.
+   * Returns the updates page.
    * @return The updates page.
    */
   public static Result getUpdates() {

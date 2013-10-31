@@ -27,22 +27,6 @@ public class FootstyleTypes {
   }
   
   /**
-   * Returns a list of footstyle types with the passed footstyleType set to true.
-   * Assumes that footstyleType is a legal footstyle type.
-   * @param footstyleType The footstyle type.
-   * @return The footstyle type list.
-   */
-  public static List<String> getTypes(String footstyleType) {
-    List<String> typeList = FootstyleTypes.getTypes();
-    //First checks if footstyleType is a valid type. If it is, then sets that footstyleType to true in the list.
-    if (isType(footstyleType)) {
-      typeList.add(footstyleType);
-    }
-    
-    return typeList;
-  }
-  
-  /**
    * Returns true if footstyleType is a valid footstyle type.
    * @param footstyleType The potential footstyle type.
    * @return True if a valid footstyleType, false otherwise.
