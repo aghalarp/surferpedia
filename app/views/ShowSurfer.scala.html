@@ -1,6 +1,6 @@
-@(surfer: Surfer, surferList: List[Surfer])
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, surfer: Surfer, surferList: List[Surfer])
 
-@Main("ShowSurfer", surferList) {
+@Main(page, isLoggedIn, userInfo, surferList) {
   <div class="container">
     <div class="row">
       <div class="col-md-4">
@@ -17,8 +17,10 @@
           <p><strong>Foot style: </strong>@surfer.getFootstyleType()</p>
           <p><strong>Biography: </strong>@surfer.getBiography()</p>
           <p>
+          @if(isLoggedIn) {
           <a href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
           <a data-toggle="modal" href="#deleteDialog" class="pull-right">Delete</a>
+          }
           </p>
         </div>
       </div>

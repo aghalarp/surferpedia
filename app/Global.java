@@ -1,5 +1,6 @@
 import models.SurferDB;
 import models.UpdateDB;
+import models.UserInfoDB;
 import play.Application;
 import play.GlobalSettings;
 import views.formdata.SurferFormData;
@@ -16,6 +17,8 @@ public class Global extends GlobalSettings {
    * @param app The application.
    */
   public void onStart(Application app) {
+    UserInfoDB.addUserInfo("John Smith", "smith@example.com", "password");
+    
     SurferDB.addSurfer(new SurferFormData("adrianodesouza", "Adriano De Souza", "Sau Paulo, Brazil", "Rip Curl Pro Bells Beach (2013), Rip Curl Pro Portugal (2011), Billabong Pro Rio (2011)", "http://tribalpoint.com.br/facecms/uploads/galeria/pj_1304093313.jpg", "http://dawf3zk2mt55y.cloudfront.net/wp-content/uploads/2011/01/Profile-Adriano-Desouza.jpg", "Adriano De Souza rode his first wave at eight years old and eight years later the surf world would take notice of this young, talented surfer at the Billabong ASP World Junior Championships. At the 2004 event, he defeated opponents four years his senior and was named the youngest ASP World Junior Champion ever at 16. Spectators observed his fast, energetic surfing and he quickly became known as one of the most exciting surfers to watch. In 2005, he won the ASP WQS by the widest margin in history. That win took him into his first year on the ASP World Tour where he finished an impressive 18th in the world. Although his style is more conducive to smaller beachbreaks, he is showing his competitors that he can also handle big wave surf, giving his country hope that he has what it takes to transition from a junior champion to something much more. To date, he's one of the most ferocious competitors the sport has ever seen and it shows in the ratings, with consistent top 10 overall finishes since 2008, positioning himself as a serious contender for a world title.", "Male", true, "Regular"));
     UpdateDB.addUpdate("Create", "Adriano De Souza");
     
