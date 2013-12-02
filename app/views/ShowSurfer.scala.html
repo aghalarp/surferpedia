@@ -18,8 +18,8 @@
           <p><strong>Biography: </strong>@surfer.getBiography()</p>
           <p>
           @if(isLoggedIn) {
-          <a href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
-          <a data-toggle="modal" href="#deleteDialog" class="pull-right">Delete</a>
+            <a class="btn btn-xs btn-info" href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
+            <a class="btn btn-xs btn-danger pull-right" data-toggle="modal" href="#deleteDialog">Delete</a>
           }
           </p>
         </div>
