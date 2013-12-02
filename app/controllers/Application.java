@@ -42,7 +42,7 @@ public class Application extends Controller {
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data); //Then fill it with form data.
     Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType); //Note: I think we can use empty param.
     List<String> footstyleTypeList = FootstyleTypes.getTypes();
-    return ok(ManageSurfer.render("ManageSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
+    return ok(ManageSurfer.render("NewSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
   }
   
   /**
@@ -56,7 +56,7 @@ public class Application extends Controller {
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
     Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
     List<String> footstyleTypeList = FootstyleTypes.getTypes();
-    return ok(ManageSurfer.render("ManageSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
+    return ok(ManageSurfer.render("EditSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, surferTypeMap, footstyleTypeList, SurferDB.getSurfers()));
   }
   
   /**
