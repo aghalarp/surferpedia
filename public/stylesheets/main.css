@@ -9,6 +9,9 @@ body {
   height: 250px;
 }
 
+.navbar {
+  border-radius: 0;
+}
 
 .bio-image {
   background-size: cover;
