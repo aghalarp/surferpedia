@@ -24,6 +24,10 @@ To add new surfers, click on the "New" button and fill out the form with informa
 To edit existings surfers, go to the surfer's biography page and click the "Edit" button on the bottom left. You can
 also delete a surfer here by clicking the "Delete" button on the bottom right of the page.
 
+ER Diagram
+----------
+![ERD](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-erd.png)
+
 Credits
 -------
 
