@@ -68,7 +68,7 @@
             </ul>
           </li>
           @if(isLoggedIn) {
-          <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New</a></li>
+          <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
           <li class="@("active".when(page == "Updates"))"><a href="@routes.Application.getUpdates()">Updates</a></li>
           }
         </ul>
