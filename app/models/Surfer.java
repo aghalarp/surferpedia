@@ -1,12 +1,32 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import play.db.ebean.Model;
+
 /**
  * Surfer class.
  * @author Dave
+ * @author Kevin
  *
  */
-public class Surfer {
-  private String slug; //Serves as unique id
+@Entity
+public class Surfer extends Model {
+  
+  private static final long serialVersionUID = -6695587840471802006L;
+
+  /**
+   * The EBean ORM finder method for database queries on ID.
+   * @return The finder method for Surfers.
+   */
+  public static Finder<Long, Surfer> find() {
+    return new Finder<Long, Surfer>(Long.class, Surfer.class);
+  }
+  
+  @Id
+  private long id;
+  
+  private String slug;
   private String name;
   private String home;
   private String awards;

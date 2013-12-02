@@ -1,12 +1,31 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import play.db.ebean.Model;
+
 /**
  * Update class. Used with UpdateDB to keep track of creation, deletion, and edit events of Surfers.
  * @author Dave
+ * @author Kevin
  *
  */
-public class Update {
+@Entity
+public class Update extends Model {
+  
+  private static final long serialVersionUID = 968691628308303092L;
+  
+  /**
+   * The EBean ORM finder method for database queries on ID.
+   * @return The finder method for Updates.
+   */
+  public static Finder<Long, Update> find() {
+    return new Finder<Long, Update>(Long.class, Update.class);
+  }
+
+  @Id
   private long id;
+  
   private String date;
   private String action;
   private String surfer;
