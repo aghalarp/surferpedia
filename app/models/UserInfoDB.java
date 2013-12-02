@@ -10,6 +10,9 @@ import java.util.Map;
  */
 public class UserInfoDB {
   
+  public static final String ADMIN = "Administrator";
+  public static final String STANDARD = "Standard";
+  
   private static Map<String, UserInfo> userinfos = new HashMap<String, UserInfo>();
   
   /**

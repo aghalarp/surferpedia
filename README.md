@@ -16,6 +16,8 @@ Installation
 
 Download the zip file, unzip, cd into the directory, invoke the Play console, and execute the run command to see the application at http://localhost:9000
 
+You need to setup the admin credentials in your environment variables. The variables are `SURFERPEDIA_ADMIN_EMAIL` and `SURFERPEDIA_ADMIN_PASSWORD`.
+
 Usage
 -----
 
