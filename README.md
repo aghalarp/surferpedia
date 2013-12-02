@@ -28,6 +28,8 @@ ER Diagram
 ----------
 ![ERD](https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-erd.png)
 
+Click [here](https://drive.google.com/file/d/0B8m7CP-fAjuDSXBET0JhbjhHQ00/edit?usp=sharing) to view/edit the ERD (collaborators only).
+
 Credits
 -------
 
