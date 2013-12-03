@@ -1,12 +1,35 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import play.db.ebean.Model;
+
 /**
  * Surfer class.
  * @author Dave
+ * @author Kevin
  *
  */
-public class Surfer {
-  private String slug; //Serves as unique id
+@Entity
+public class Surfer extends Model {
+  
+  private static final long serialVersionUID = -6695587840471802006L;
+
+  /**
+   * The EBean ORM finder method for database queries on ID.
+   * @return The finder method for Surfers.
+   */
+  public static Finder<Long, Surfer> find() {
+    return new Finder<Long, Surfer>(Long.class, Surfer.class);
+  }
+  
+  @Id
+  private long id;
+  
+  private String slug;
   private String name;
   private String home;
   private String awards;
@@ -16,7 +39,6 @@ public class Surfer {
   private String surferType; //Male, Female, or Grom
   private Boolean isEditable = false;
   private String footstyleType; //Regular or Goofy
-  
   
   /**
    * Creates a new Surfer.
@@ -46,7 +68,6 @@ public class Surfer {
     this.isEditable = isEditable;
     this.footstyleType = footstyleType;
   }
-  
   
   /**
    * @return the slug
@@ -171,6 +192,4 @@ public class Surfer {
   public void setFootstyleType(String footstyleType) {
     this.footstyleType = footstyleType;
   }
-  
-  
 }

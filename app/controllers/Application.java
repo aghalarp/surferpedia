@@ -3,7 +3,6 @@ package controllers;
 import java.util.List;
 import java.util.Map;
 import models.SurferDB;
-import models.UpdateDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -16,7 +15,6 @@ import views.html.Index;
 import views.html.Login;
 import views.html.ManageSurfer;
 import views.html.ShowSurfer;
-import views.html.Updates;
 
 
 /**
@@ -84,14 +82,6 @@ public class Application extends Controller {
     else {
       SurferFormData data = formData.get(); //Creates the object we made (SurferFormData) and fills with get data
       
-      //Create Update event. Note, should consider moving this to SurferDB addSurfer method
-      if (!SurferDB.slugExists(data.slug)) { //If slug does not exist yet in DB, it must be a new event
-        UpdateDB.addUpdate("Create", data.name);
-      }
-      else {
-        UpdateDB.addUpdate("Edit", data.name);
-      }
-      
       //Add to database
       SurferDB.addSurfer(data);
       
@@ -122,15 +112,6 @@ public class Application extends Controller {
     //Note, UpdateDB delete event is done in SurferDB.deleteSurfer() method. Could also move that code here...
     
     return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.getSurfers()));
-  }
-  
-  /**
-   * Returns the updates page.
-   * @return The updates page.
-   */
-  @Security.Authenticated(Secured.class)
-  public static Result getUpdates() {
-    return ok(Updates.render("Updates", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), UpdateDB.getUpdates(), SurferDB.getSurfers()));
   }
   
   
