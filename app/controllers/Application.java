@@ -27,7 +27,7 @@ public class Application extends Controller {
    * @return The resulting home page.
    */
   public static Result index() {
-    return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.getSurfers()));
+    return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.random(3)));
   }
 
   /**
