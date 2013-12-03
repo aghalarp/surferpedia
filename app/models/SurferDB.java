@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 import views.formdata.SurferFormData;
 
@@ -80,5 +81,24 @@ public class SurferDB {
     if (surfer != null) {
       surfer.delete();
     }
+  }
+
+  /**
+   * Retrieves random Surfers from the database.
+   * 
+   * @param count Number of Surfers to get.
+   * @return A random set of Surfers.
+   */
+  public static List<Surfer> random(int count) {
+    List<Surfer> surfers = Surfer.find().all();
+    List<Surfer> result = new ArrayList<>();
+    if (surfers.size() < count) {
+      count = surfers.size();
+    }
+    for (int i = 0; i < count; i++) {
+      int rand = (int) Math.floor(Math.random() * surfers.size());
+      result.add(surfers.remove(rand));
+    }
+    return result;
   }
 }
