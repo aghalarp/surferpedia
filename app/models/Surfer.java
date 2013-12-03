@@ -1,7 +1,10 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import play.db.ebean.Model;
 
 /**
@@ -37,7 +40,6 @@ public class Surfer extends Model {
   private Boolean isEditable = false;
   private String footstyleType; //Regular or Goofy
   
-  
   /**
    * Creates a new Surfer.
    * 
@@ -66,7 +68,6 @@ public class Surfer extends Model {
     this.isEditable = isEditable;
     this.footstyleType = footstyleType;
   }
-  
   
   /**
    * @return the slug
@@ -191,6 +192,4 @@ public class Surfer extends Model {
   public void setFootstyleType(String footstyleType) {
     this.footstyleType = footstyleType;
   }
-  
-  
 }

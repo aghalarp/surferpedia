@@ -1,90 +1,84 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import views.formdata.SurferFormData;
 
 /**
  * A simple in-memory repository/database for Surfer data.
+ * 
  * @author Dave
- *
+ * 
  */
 public class SurferDB {
-  
-  private static Map<String, Surfer> surfers = new HashMap<>();
-  
+
   /**
    * Adds or edits a Surfer object to the database.
+   * 
    * @param formData The surfer data.
    * @return The newly created surfer.
    */
   public static Surfer addSurfer(SurferFormData formData) {
-    
-    Surfer surfer = new Surfer(formData.slug, formData.name, formData.home, formData.awards, 
-        formData.carouselImgUrl, formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable, 
-        formData.footstyleType);
-    
-    surfers.put(formData.slug, surfer);
-    
+
+    Surfer surfer = getSurfer(formData.slug);
+    if (surfer != null) {
+      surfer.setName(formData.name);
+      surfer.setHome(formData.home);
+      surfer.setAwards(formData.awards);
+      surfer.setCarouselImgUrl(formData.carouselImgUrl);
+      surfer.setBioImgUrl(formData.bioImgUrl);
+      surfer.setBiography(formData.biography);
+      surfer.setSurferType(formData.surferType);
+      surfer.setIsEditable(formData.isEditable);
+      surfer.setFootstyleType(formData.footstyleType);
+    }
+    else {
+      surfer =
+          new Surfer(formData.slug, formData.name, formData.home, formData.awards, formData.carouselImgUrl,
+              formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable, formData.footstyleType);
+    }
+    surfer.save();
+
     return surfer;
   }
-  
+
   /**
    * Checks if Surfer slug already exists.
+   * 
    * @param slug The Surfer slug.
    * @return True if slug exists, False otherwise.
    */
   public static boolean slugExists(String slug) {
-    if (surfers.containsKey(slug)) {
-      return true;
-    }
-    
-    return false;
+    return Surfer.find().where().eq("slug", slug).findUnique() != null;
   }
-  
+
   /**
-   * Returns a Surfer instance associated with the passed slug, or throws a RuntimeException if the slug is not found.
+   * Returns a Surfer instance associated with the passed slug.
+   * 
    * @param slug The slug.
    * @return The retrieved Surfer object.
    */
   public static Surfer getSurfer(String slug) {
-    Surfer surfer = surfers.get(slug);
-    
-    if (surfer == null) {
-      throw new RuntimeException("Passed an invalid slug: " + slug);
-    }
-    else {
-      return surfer;
-    }
+    return Surfer.find().where().eq("slug", slug).findUnique();
   }
-  
+
   /**
    * Returns a list containing all defined surfers.
+   * 
    * @return A list of Surfer objects.
    */
   public static List<Surfer> getSurfers() {
-    return new ArrayList<>(surfers.values());
+    return Surfer.find().all();
   }
-  
+
   /**
-   * Deletes the specified slug from the surfers Map.
-   * @param slug The slug to delete.
+   * Deletes the specified surfer.
+   * 
+   * @param slug The slug associated with the surfer to delete.
    */
   public static void deleteSurfer(String slug) {
-    Surfer surfer = surfers.get(slug);
-    
-    if (surfer == null) {
-      throw new RuntimeException("Passed an invalid slug: " + slug);
-    }
-    else { 
-      //Update event database.
-      UpdateDB.addUpdate("Delete", getSurfer(slug).getName());
-      //Then remove surfer.
-      surfers.remove(slug);
-      
-      
+    Surfer surfer = getSurfer(slug);
+    if (surfer != null) {
+      surfer.delete();
     }
   }
 }
