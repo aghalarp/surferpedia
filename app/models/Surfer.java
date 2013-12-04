@@ -6,26 +6,28 @@ import play.db.ebean.Model;
 
 /**
  * Surfer class.
+ * 
  * @author Dave
  * @author Kevin
- *
+ * 
  */
 @Entity
 public class Surfer extends Model {
-  
+
   private static final long serialVersionUID = -6695587840471802006L;
 
   /**
    * The EBean ORM finder method for database queries on ID.
+   * 
    * @return The finder method for Surfers.
    */
   public static Finder<Long, Surfer> find() {
     return new Finder<Long, Surfer>(Long.class, Surfer.class);
   }
-  
+
   @Id
   private long id;
-  
+
   private String slug;
   private String name;
   private String home;
@@ -33,10 +35,11 @@ public class Surfer extends Model {
   private String carouselImgUrl;
   private String bioImgUrl;
   private String biography;
-  private String surferType; //Male, Female, or Grom
+  private String surferType; // Male, Female, or Grom
   private Boolean isEditable = false;
-  private String footstyleType; //Regular or Goofy
-  
+  private String footstyleType; // Regular or Goofy
+  private String country;
+
   /**
    * Creates a new Surfer.
    * 
@@ -51,9 +54,9 @@ public class Surfer extends Model {
    * @param isEditable If surfer is editable.
    * @param footstyleType Regular or Goofy.
    */
-  public Surfer(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl, 
-                 String biography, String surferType, Boolean isEditable, String footstyleType) {
-    
+  public Surfer(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl,
+      String biography, String surferType, Boolean isEditable, String footstyleType, String country) {
+
     this.slug = slug;
     this.name = name;
     this.home = home;
@@ -64,8 +67,9 @@ public class Surfer extends Model {
     this.surferType = surferType;
     this.isEditable = isEditable;
     this.footstyleType = footstyleType;
+    this.country = country;
   }
-  
+
   /**
    * @return the slug
    */
@@ -79,85 +83,97 @@ public class Surfer extends Model {
   public String getName() {
     return name;
   }
+
   /**
    * @param name the name to set
    */
   public void setName(String name) {
     this.name = name;
   }
+
   /**
    * @return the home
    */
   public String getHome() {
     return home;
   }
+
   /**
    * @param home the home to set
    */
   public void setHome(String home) {
     this.home = home;
   }
+
   /**
    * @return the awards
    */
   public String getAwards() {
     return awards;
   }
+
   /**
    * @param awards the awards to set
    */
   public void setAwards(String awards) {
     this.awards = awards;
   }
+
   /**
    * @return the carouselImgUrl
    */
   public String getCarouselImgUrl() {
     return carouselImgUrl;
   }
+
   /**
    * @param carouselImgUrl the carouselImgUrl to set
    */
   public void setCarouselImgUrl(String carouselImgUrl) {
     this.carouselImgUrl = carouselImgUrl;
   }
+
   /**
    * @return the bioImgUrl
    */
   public String getBioImgUrl() {
     return bioImgUrl;
   }
+
   /**
    * @param bioImgUrl the bioImgUrl to set
    */
   public void setBioImgUrl(String bioImgUrl) {
     this.bioImgUrl = bioImgUrl;
   }
+
   /**
    * @return the biography
    */
   public String getBiography() {
     return biography;
   }
+
   /**
    * @param biography the biography to set
    */
   public void setBiography(String biography) {
     this.biography = biography;
   }
+
   /**
    * @return the surferType
    */
   public String getSurferType() {
     return surferType;
   }
+
   /**
    * @param surferType the surferType to set
    */
   public void setSurferType(String surferType) {
     this.surferType = surferType;
   }
-
 
   /**
    * @return the isEditable
@@ -166,14 +182,12 @@ public class Surfer extends Model {
     return isEditable;
   }
 
-
   /**
    * @param isEditable the isEditable to set
    */
   public void setIsEditable(Boolean isEditable) {
     this.isEditable = isEditable;
   }
-
 
   /**
    * @return the footstyleType
@@ -182,11 +196,24 @@ public class Surfer extends Model {
     return footstyleType;
   }
 
-
   /**
    * @param footstyleType the footstyleType to set
    */
   public void setFootstyleType(String footstyleType) {
     this.footstyleType = footstyleType;
+  }
+
+  /**
+   * @return the country.
+   */
+  public String getCountry() {
+    return this.country;
+  }
+
+  /**
+   * @param country the country to set
+   */
+  public void setCountry(String country) {
+    this.country = country;
   }
 }

@@ -31,11 +31,13 @@ public class SurferDB {
       surfer.setSurferType(formData.surferType);
       surfer.setIsEditable(formData.isEditable);
       surfer.setFootstyleType(formData.footstyleType);
+      surfer.setCountry(formData.country);
     }
     else {
       surfer =
           new Surfer(formData.slug, formData.name, formData.home, formData.awards, formData.carouselImgUrl,
-              formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable, formData.footstyleType);
+              formData.bioImgUrl, formData.biography, formData.surferType, formData.isEditable, formData.footstyleType,
+              formData.country);
     }
     surfer.save();
 

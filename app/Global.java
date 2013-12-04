@@ -42,7 +42,7 @@ public class Global extends GlobalSettings {
               "http://tribalpoint.com.br/facecms/uploads/galeria/pj_1304093313.jpg",
               "http://dawf3zk2mt55y.cloudfront.net/wp-content/uploads/2011/01/Profile-Adriano-Desouza.jpg",
               "Adriano De Souza rode his first wave at eight years old and eight years later the surf world would take notice of this young, talented surfer at the Billabong ASP World Junior Championships...",
-              "Male", true, "Regular"));
+              "Male", true, "Regular", "Brazil"));
     }
   }
 }

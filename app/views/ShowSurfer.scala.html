@@ -16,6 +16,7 @@
           <p><strong>Awards: </strong>@surfer.getAwards()</p>
           <p><strong>Foot style: </strong>@surfer.getFootstyleType()</p>
           <p><strong>Biography: </strong>@surfer.getBiography()</p>
+          <p><strong>Country: </strong>@surfer.getCountry()</p>
           <p>
           @if(isLoggedIn) {
             <a class="btn btn-xs btn-info" href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
