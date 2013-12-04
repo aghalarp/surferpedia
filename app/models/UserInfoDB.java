@@ -50,12 +50,9 @@ public class UserInfoDB {
    * @return True if email is a valid user email and password is valid for that email.
    */
   public static boolean isValid(String email, String password) {
-    return ((email != null) 
-            &&
-            (password != null) 
-            &&
-            isUser(email) 
-            &&
+    return ((email != null) &&
+            (password != null) &&
+            isUser(email) &&
             getUser(email).getPassword().equals(password));
   }
 }
