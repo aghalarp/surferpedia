@@ -23,6 +23,13 @@ public class Global extends GlobalSettings {
     String adminEmail = Play.application().configuration().getString("admin.email");
     String adminPassword = Play.application().configuration().getString("admin.password");
 
+    if (adminEmail == null) {
+      System.err.println("The admin email environmental variable was not set correctly.");
+    }
+    if (adminPassword == null) {
+      System.err.println("The admin password environmental variable was not set correctly.");
+    }
+
     UserInfoDB.addUserInfo(UserInfoDB.ADMIN, adminEmail, adminPassword);
 
     if (SurferDB.getSurfers().isEmpty()) {

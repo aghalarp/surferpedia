@@ -50,7 +50,7 @@ public class UserInfo {
    * @return the password
    */
   public String getPassword() {
-    return password;
+    return this.password;
   }
   /**
    * @param password the password to set

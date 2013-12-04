@@ -40,7 +40,7 @@ public class UserInfoDB {
    * @return The UserInfo.
    */
   public static UserInfo getUser(String email) {
-    return userinfos.get((email == null) ? "" : email);
+    return userinfos.get(email);
   }
 
   /**
