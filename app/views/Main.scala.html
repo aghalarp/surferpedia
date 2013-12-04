@@ -23,7 +23,7 @@
     <div class="header hidden-xs"></div>
    
      <!-- Responsive navbar -->
-  <div class="navbar navbar-inverse" role="navigation">
+  <div class="navbar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,6 +38,28 @@
           @if(isLoggedIn) {
           <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
           }
+          
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <select class="form-control">
+                <option>All Genders</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Grom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="form-control">
+                <option>Any Country</option>
+                <option>USA</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          
         </ul>
         
         @if(isLoggedIn) {
