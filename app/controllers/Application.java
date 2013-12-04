@@ -88,16 +88,10 @@ public class Application extends Controller {
     }
     else {
       SurferFormData data = formData.get(); // Creates the object we made (SurferFormData) and fills with get data
-
       // Add to database
       SurferDB.addSurfer(data);
-
-      Map<String, Boolean> surferTypeMap = SurferTypes.getTypes(data.surferType);
-      List<String> footstyleTypeList = FootstyleTypes.getTypes();
-      return ok(ManageSurfer.render("ManageSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
-          surferTypeMap, footstyleTypeList));
+      return redirect("/surfer/" + data.slug + "/edit");
     }
-
   }
 
   /**
@@ -120,9 +114,7 @@ public class Application extends Controller {
   @Security.Authenticated(Secured.class)
   public static Result deleteSurfer(String slug) {
     SurferDB.deleteSurfer(slug);
-    // Note, UpdateDB delete event is done in SurferDB.deleteSurfer() method. Could also move that code here...
-
-    return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.getSurfers()));
+    return redirect("/");
   }
 
   /**
