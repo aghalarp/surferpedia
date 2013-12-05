@@ -16,12 +16,12 @@ Installation
 
 Download the zip file, unzip, cd into the directory, invoke the Play console, and execute the run command to see the application at http://localhost:9000
 
-You need to setup the admin credentials in your environment variables. The variables are `SURFERPEDIA_ADMIN_EMAIL` and `SURFERPEDIA_ADMIN_PASS`.
+You need to setup the admin credentials in your environment variables. The variables are `SURFERPEDIA_ADMIN_EMAIL` and `SURFERPEDIA_ADMIN_PASSWORD`.
 
 You need to setup a database to use with the application. You can install MySQL from the [website](http://dev.mysql.com/downloads/mysql/) and setup the following environment variables:
-- SURFERPEDIA_DB_URL
-- SURFERPEDIA_DB_USER
-- SURFERPEDIA_DB_PASS
+- DATABASE_URL_DB
+- DATABASE_USERNAME_DB
+- DATABASE_PASSWORD_DB
 
 Usage
 -----
