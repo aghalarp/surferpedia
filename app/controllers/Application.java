@@ -33,8 +33,9 @@ public class Application extends Controller {
   public static Result index() {
     List<String> countryTypeList = CountryTypes.getTypes();
     Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
-    
-    return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.random(3), countryTypeList, searchFormData));
+
+    return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), SurferDB.random(3),
+        countryTypeList, searchFormData));
   }
 
   /**
@@ -116,7 +117,7 @@ public class Application extends Controller {
   public static Result getSurfer(String slug) {
     List<String> countryTypeList = CountryTypes.getTypes();
     Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
-    
+
     return ok(ShowSurfer.render("ShowSurfer", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
         SurferDB.getSurfer(slug), countryTypeList, searchFormData));
   }
@@ -142,8 +143,9 @@ public class Application extends Controller {
     Form<LoginFormData> formData = Form.form(LoginFormData.class);
     List<String> countryTypeList = CountryTypes.getTypes();
     Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
-    
-    return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, countryTypeList, searchFormData));
+
+    return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, countryTypeList,
+        searchFormData));
   }
 
   /**
@@ -162,9 +164,9 @@ public class Application extends Controller {
       flash("error", "Login credentials not valid.");
       List<String> countryTypeList = CountryTypes.getTypes();
       Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
-      
-      return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, countryTypeList, 
-                                    searchFormData));
+
+      return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData,
+          countryTypeList, searchFormData));
     }
     else {
       // email/password OK, so now we set the session variable and only go to authenticated pages.
@@ -184,7 +186,7 @@ public class Application extends Controller {
     session().clear();
     return redirect(routes.Application.index());
   }
-  
+
   /**
    * Processes search form.
    * 
@@ -193,17 +195,16 @@ public class Application extends Controller {
   public static Result postSearchForm() {
     Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).bindFromRequest();
     List<String> countryTypeList = CountryTypes.getTypes();
-    
-    if(searchFormData.hasErrors()) {
-      System.out.println("Errors");
-      return redirect(routes.Application.index()); //Temporary
+
+    if (searchFormData.hasErrors()) {
+      throw new RuntimeException("This should never happen. Grats!");
     }
     else {
-      List<Surfer> searchResultList = SurferDB.surferSearch(searchFormData.get().name, searchFormData.get().gender, searchFormData.get().country);
+      List<Surfer> searchResultList =
+          SurferDB.surferSearch(searchFormData.get().name, searchFormData.get().gender, searchFormData.get().country);
       return ok(SearchResults.render("SearchResults", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           searchResultList, countryTypeList, searchFormData));
     }
-    
-    
+
   }
 }
