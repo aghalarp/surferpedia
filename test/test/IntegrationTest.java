@@ -3,6 +3,7 @@ package test;
 import org.junit.Test;
 import play.test.TestBrowser;
 import play.libs.F.Callback;
+import test.pages.IndexPage;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.fakeApplication;
@@ -18,17 +19,15 @@ public class IntegrationTest {
   private static final int PORT = 3333;
 
   /**
-   * Check to see that the two pages can be displayed.
+   * Sample test that submits a form and then checks that form data was echoed to page.
    */
   @Test
   public void test() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
-        browser.goTo("http://localhost:3333");
-        assertThat(browser.pageSource()).contains("home page");
-
-        browser.goTo("http://localhost:3333/page1");
-        assertThat(browser.pageSource()).contains("Page1");
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        assertThat(browser.pageSource()).contains("Surferpedia");
       }
     });
   }
