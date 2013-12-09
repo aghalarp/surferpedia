@@ -1,0 +1,21 @@
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, surfers: List[Surfer], countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])
+
+@Main(page, isLoggedIn, userInfo, countryTypes, searchForm) {
+  <div class="container">
+    <h1>Search Results</h1>
+    
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      
+      @for(surfer <- surfers) {
+      <tr>
+      <td><a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a></td>
+      <td>@surfer.getBiography()</td>
+      </tr>
+      }
+    </table>
+  </div>
+}

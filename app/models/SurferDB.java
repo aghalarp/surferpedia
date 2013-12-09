@@ -103,4 +103,27 @@ public class SurferDB {
     }
     return result;
   }
+  
+  /**
+   * For the surfer search widget.
+   * Retrieves a list of Surfers from database matching the given search parameters.
+   * 
+   * @param name The name of the surfer.
+   * @param gender The gender of the surfer
+   * @param country The surfer's country of origin.
+   * @return A list of matching Surfers.
+   */
+  public static List<Surfer> surferSearch(String name, String gender, String country) {
+    if (gender.equals("allGenders")) {
+      gender = "%"; //Wildcard, to allow for all genders to be searched
+    }
+    
+    if (country.equals("allCountries")) {
+      country = "%";
+    }
+    
+    List<Surfer> result = Surfer.find().where().ilike("name", "%" + name + "%").ilike("surferType", gender).ilike("country", country).findList();
+    
+    return result;
+  }
 }

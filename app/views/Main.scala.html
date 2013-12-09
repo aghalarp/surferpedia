@@ -1,4 +1,6 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo)(content: Html)
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])(content: Html)
+
+@import helper._
 
 <!DOCTYPE html>
 
@@ -39,26 +41,36 @@
           <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
           }
           
-          <form class="navbar-form navbar-left" role="search">
+          @form(routes.Application.postSearchForm(), 'class -> "form-inline") {
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Name">
+              <input type="text" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                placeholder="Name" />
             </div>
             <div class="form-group">
-              <select class="form-control">
-                <option>All Genders</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Grom</option>
+              <select class="form-control"
+                id="gender"
+                name="gender">
+                <option id="allGenders" value="allGenders">All Genders</option>
+                <option id="male" value="male">Male</option>
+                <option id="female" value="female">Female</option>
+                <option id="grom" value="grom">Grom</option>
               </select>
             </div>
             <div class="form-group">
-              <select class="form-control">
-                <option>Any Country</option>
-                <option>USA</option>
+              <select class="form-control"
+                id="country"
+                name="country">
+                <option id="allCountries" value="allCountries">All Countries</option>
+                @for(country <- countryTypes) {
+                  <option id="@country" value="@country">@country</option>
+                }
               </select>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
-          </form>
+          }
           
         </ul>
         

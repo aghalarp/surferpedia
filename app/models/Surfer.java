@@ -53,6 +53,7 @@ public class Surfer extends Model {
    * @param surferType Set to Male, Female, or Grom.
    * @param isEditable If surfer is editable.
    * @param footstyleType Regular or Goofy.
+   * @param country The country the surfer represents.
    */
   public Surfer(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl,
       String biography, String surferType, Boolean isEditable, String footstyleType, String country) {
