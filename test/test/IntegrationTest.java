@@ -4,6 +4,7 @@ import org.junit.Test;
 import play.test.TestBrowser;
 import play.libs.F.Callback;
 import test.pages.IndexPage;
+import test.pages.LoginPage;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.fakeApplication;
@@ -19,10 +20,10 @@ public class IntegrationTest {
   private static final int PORT = 3333;
 
   /**
-   * Sample test that submits a form and then checks that form data was echoed to page.
+   * Test that makes sure the Index page is retrievable.
    */
   @Test
-  public void test() {
+  public void testIndex() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
         IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
@@ -31,5 +32,22 @@ public class IntegrationTest {
       }
     });
   }
-
+  
+  /**
+   * Login test that logs in.
+   */
+  @Test
+  public void testLogin() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        assertThat(browser.pageSource()).contains("Please log in");
+        
+        // test incorrect logins.
+        loginPage.login("test", "incorrect");
+        assertThat(browser.pageSource()).contains("Login credentials not valid.");
+      }
+    });
+  }
 }
