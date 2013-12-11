@@ -10,6 +10,11 @@ import models.UserInfoDB;
  */
 public class LoginFormData {
 
+  /**
+   * Response text when logging in fails.
+   */
+  public static final String ERROR_TEXT = "Login credentials not valid.";
+  
   /** The submitted email. */
   public String email = "";
   /** The submitted password. */

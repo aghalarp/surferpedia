@@ -1,10 +1,12 @@
 package test;
 
 import org.junit.Test;
+import controllers.Application;
 import play.test.TestBrowser;
 import play.libs.F.Callback;
 import test.pages.IndexPage;
 import test.pages.LoginPage;
+import views.formdata.LoginFormData;
 import static play.test.Helpers.HTMLUNIT;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.fakeApplication;
@@ -46,7 +48,11 @@ public class IntegrationTest {
         
         // test incorrect logins.
         loginPage.login("test", "incorrect");
-        assertThat(browser.pageSource()).contains("Login credentials not valid.");
+        assertThat(browser.pageSource()).contains(LoginFormData.ERROR_TEXT);
+        
+        // test correct logins
+        loginPage.login(Application.adminEmail, Application.adminPassword);
+        assertThat(browser.pageSource()).contains(Application.adminEmail);
       }
     });
   }

@@ -1,6 +1,6 @@
 import models.SurferDB;
 import models.UserInfoDB;
-import play.Application;
+import controllers.Application;
 import play.GlobalSettings;
 import play.Play;
 import views.formdata.SurferFormData;
@@ -18,19 +18,19 @@ public class Global extends GlobalSettings {
    * 
    * @param app The application.
    */
-  public void onStart(Application app) {
+  public void onStart(play.Application app) {
 
-    String adminEmail = Play.application().configuration().getString("admin.email");
-    String adminPassword = Play.application().configuration().getString("admin.password");
+    Application.adminEmail = Play.application().configuration().getString("admin.email");
+    Application.adminPassword = Play.application().configuration().getString("admin.password");
 
-    if (adminEmail == null) {
+    if (Application.adminEmail == null) {
       System.err.println("The admin email environmental variable was not set correctly.");
     }
-    if (adminPassword == null) {
+    if (Application.adminPassword == null) {
       System.err.println("The admin password environmental variable was not set correctly.");
     }
 
-    UserInfoDB.addUserInfo(UserInfoDB.ADMIN, adminEmail, adminPassword);
+    UserInfoDB.addUserInfo(UserInfoDB.ADMIN, Application.adminEmail, Application.adminPassword);
 
     if (SurferDB.getSurfers().isEmpty()) {
       // Males

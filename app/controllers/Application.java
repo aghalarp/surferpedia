@@ -25,6 +25,9 @@ import views.html.SearchResults;
  */
 public class Application extends Controller {
 
+  public static String adminEmail;
+  public static String adminPassword;
+  
   /**
    * Returns the home page.
    * 
@@ -161,7 +164,7 @@ public class Application extends Controller {
     Form<LoginFormData> formData = Form.form(LoginFormData.class).bindFromRequest();
 
     if (formData.hasErrors()) {
-      flash("error", "Login credentials not valid.");
+      flash("error", LoginFormData.ERROR_TEXT);
       List<String> countryTypeList = CountryTypes.getTypes();
       Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
 
