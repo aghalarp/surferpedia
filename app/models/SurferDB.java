@@ -121,9 +121,11 @@ public class SurferDB {
     if (country.equals("allCountries")) {
       country = "%";
     }
-    
-    List<Surfer> result = Surfer.find().where().ilike("name", "%" + name + "%").ilike("surferType", gender).ilike("country", country).findList();
-    
+
+    List<Surfer> result =
+        Surfer.find().where().ilike("name", "%" + name + "%").ilike("surferType", gender).ilike("country", country)
+            .orderBy("name ASC").findList();
+
     return result;
   }
 }
