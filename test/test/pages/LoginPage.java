@@ -14,6 +14,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * @author Philip Johnson
  * @author Kevin
  */
+@SuppressWarnings("unused")
 public class LoginPage extends FluentPage {
   private String url;
 

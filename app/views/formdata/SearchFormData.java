@@ -1,9 +1,8 @@
 package views.formdata;
 
-import play.data.validation.ValidationError;
 import java.util.ArrayList;
 import java.util.List;
-import models.UserInfoDB;
+import play.data.validation.ValidationError;
 
 /**
  * Backing class for the login form.
