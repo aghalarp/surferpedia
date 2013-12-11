@@ -203,7 +203,7 @@ public class Application extends Controller {
       List<Surfer> searchResultList =
           SurferDB.surferSearch(searchFormData.get().name, searchFormData.get().gender, searchFormData.get().country);
       return ok(SearchResults.render("SearchResults", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
-          searchResultList, countryTypeList, searchFormData));
+          searchResultList, countryTypeList, searchFormData, 4));
     }
 
   }
