@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Surferpedia by aghalarp</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Surferpedia : A Play application providing an encyclopedia of surfers." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Surferpedia</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Surferpedia</h1>
-          <h2>A Play application providing an encyclopedia of surfers.</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/aghalarp/surferpedia">View on GitHub</a>
+
+          <h1 id="project_title">Surferpedia</h1>
+          <h2 id="project_tagline">A Play application providing an encyclopedia of surfers.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/aghalarp/surferpedia/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/aghalarp/surferpedia/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/aghalarp/surferpedia/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/aghalarp/surferpedia/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/aghalarp/surferpedia" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-homepage.png" alt="screenshot"></p>
 
-        <hr>
+<p><img src="https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-newsurfer.png" alt="screenshot"></p>
 
-        <section id="main_content">
-          <p><img src="https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-home.png" alt="screenshot"></p>
+<p><img src="https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-surferpage.png" alt="screenshot"></p>
+
+<p><img src="https://raw.github.com/aghalarp/surferpedia/dynamic/doc/surferpedia-docs-editsurfer.png" alt="screenshot"></p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
@@ -43,24 +49,45 @@
 
 <p>Download the zip file, unzip, cd into the directory, invoke the Play console, and execute the run command to see the application at http://localhost:9000</p>
 
-<h2>
+<p>You need to setup the admin credentials in your environment variables. The variables are <code>SURFERPEDIA_ADMIN_EMAIL</code> and <code>SURFERPEDIA_ADMIN_PASSWORD</code>.</p>
+
+<p>You need to setup a database to use with the application. You can install MySQL from the <a href="http://dev.mysql.com/downloads/mysql/">website</a> and setup the following environment variables:</p>
+
+<ul>
+<li>DATABASE_URL_DB</li>
+<li>DATABASE_USERNAME_DB</li>
+<li>DATABASE_PASSWORD_DB</li>
+</ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Use the navbar to find interior pages with bio information on surfers.</p>
+<p>Use the navbar to find interior pages with bio information on surfers.
+To add new surfers, click on the "New" button and fill out the form with information on the surfer.
+To edit existings surfers, go to the surfer's biography page and click the "Edit" button on the bottom left. You can
+also delete a surfer here by clicking the "Delete" button on the bottom right of the page.</p>
+
+<h2>
+<a name="er-diagram" class="anchor" href="#er-diagram"><span class="octicon octicon-link"></span></a>ER Diagram</h2>
+
+<p><img src="https://raw.github.com/aghalarp/surferpedia/master/doc/surferpedia-docs-erd.png" alt="ERD"></p>
+
+<p>Click <a href="https://drive.google.com/file/d/0B8m7CP-fAjuDSXBET0JhbjhHQ00/edit?usp=sharing">here</a> to view/edit the ERD (collaborators only).</p>
 
 <h2>
 <a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
 
 <p>Thanks to ICS 314, Fall 2013 for support</p>
-        </section>
-
-        <footer>
-          Surferpedia is maintained by <a href="https://github.com/aghalarp">aghalarp</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Surferpedia maintained by <a href="https://github.com/aghalarp">aghalarp</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
