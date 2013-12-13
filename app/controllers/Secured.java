@@ -58,6 +58,16 @@ public class Secured extends Security.Authenticator {
   }
   
   /**
+   * True if there is a logged in ADMIN user, false otherwise.
+   * @param ctx The context
+   * @return True if there is a logged in ADMIN user
+   */
+  public static boolean isAdmin(Context ctx) {
+    UserInfo user = getUserInfo(ctx);
+    return (user != null && user.getType().equals(UserInfoDB.ADMIN));
+  }
+  
+  /**
    * Return the UserInfo of the logged in user, or null if no user is logged in.
    * @param ctx The context.
    * @return The UserInfo, or null.
