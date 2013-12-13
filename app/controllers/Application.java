@@ -18,6 +18,7 @@ import views.html.Index;
 import views.html.Login;
 import views.html.ManageSurfer;
 import views.html.ShowSurfer;
+import views.html.Signup;
 import views.html.SearchResults;
 
 /**
@@ -27,7 +28,7 @@ public class Application extends Controller {
 
   public static String adminEmail;
   public static String adminPassword;
-  
+
   /**
    * Returns the home page.
    * 
@@ -208,6 +209,26 @@ public class Application extends Controller {
       return ok(SearchResults.render("SearchResults", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()),
           searchResultList, countryTypeList, searchFormData, 4));
     }
+  }
 
+  /**
+   * Displays the signup page.
+   * @return Signup page.
+   */
+  public static Result signup() {
+    Form<LoginFormData> formData = Form.form(LoginFormData.class);
+    List<String> countryTypeList = CountryTypes.getTypes();
+    Form<SearchFormData> searchFormData = Form.form(SearchFormData.class).fill(new SearchFormData());
+
+    return ok(Signup.render("Signup", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData, countryTypeList,
+        searchFormData));
+  }
+
+  /**
+   * Processes the signup page.
+   * @return Signup page on fail, Login page on success.
+   */
+  public static Result postSignup() {
+    return index();
   }
 }
