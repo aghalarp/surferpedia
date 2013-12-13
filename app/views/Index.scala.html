@@ -1,6 +1,6 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, surferList: List[Surfer], countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])
+@(page: String, isLoggedIn: Boolean, isAdmin: Boolean, userInfo: UserInfo, surferList: List[Surfer], countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])
 
-@Main(page, isLoggedIn, userInfo, countryTypes, searchForm) {
+@Main(page, isLoggedIn, isAdmin, userInfo, countryTypes, searchForm) {
   <div class="container">
     <div id="carousel-example-generic" data-ride="carousel" class="carousel slide">
       <!-- Indicators -->

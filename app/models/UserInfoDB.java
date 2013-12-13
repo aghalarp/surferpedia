@@ -1,7 +1,5 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Provides an in-memory repository for UserInfo. Storing credentials in the clear is kind of bogus.
@@ -21,7 +19,6 @@ public class UserInfoDB {
    * @param password Their password.
    */
   public static void addUserInfo(String type, String email, String password) {
-    // userinfos.put(email, new UserInfo(type, email, password));
     UserInfo userInfo = getUser(email);
     if (userInfo != null) {
       userInfo.setType(type);
@@ -62,6 +59,6 @@ public class UserInfoDB {
    * @return True if email is a valid user email and password is valid for that email.
    */
   public static boolean isValid(String email, String password) {
-    return (UserInfo.find().where().eq("email", email).where().eq("password", password) != null);
+    return (UserInfo.find().where().eq("email", email).where().eq("password", password).findUnique() != null);
   }
 }

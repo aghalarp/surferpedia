@@ -1,4 +1,4 @@
-@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])(content: Html)
+@(page: String, isLoggedIn: Boolean, isAdmin: Boolean, userInfo: UserInfo, countryTypes: List[String], searchForm: Form[views.formdata.SearchFormData])(content: Html)
 
 @import helper._
 
@@ -41,8 +41,8 @@
       <div class="collapse navbar-collapse">
         
         <ul class="nav navbar-nav">
-          @if(isLoggedIn) {
-          <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
+          @if(isAdmin) {
+            <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
           }
           
           @form(routes.Application.postSearchForm(), 'class -> "form-inline") {
