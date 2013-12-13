@@ -1,7 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import play.db.ebean.Model;
 
 /**
@@ -39,6 +43,9 @@ public class Surfer extends Model {
   private Boolean isEditable = false;
   private String footstyleType; // Regular or Goofy
   private String country;
+
+  @ManyToMany(mappedBy = "surfers", cascade = CascadeType.ALL )
+  private List<UserInfo> userInfos = new ArrayList<>();
 
   /**
    * Creates a new Surfer.

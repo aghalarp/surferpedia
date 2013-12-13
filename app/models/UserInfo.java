@@ -1,7 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import play.db.ebean.Model;
 
 /**
@@ -31,6 +35,9 @@ public class UserInfo extends Model {
   private String type;
   private String email;
   private String password;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  private List<Surfer> surfers = new ArrayList<>();
 
   /**
    * Creates a new UserInfo instance.

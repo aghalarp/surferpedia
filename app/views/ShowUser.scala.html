@@ -1,0 +1,14 @@
+@(page: String,
+  isLoggedIn: Boolean,
+  isAdmin: Boolean,
+  userInfo: UserInfo,
+  profileUser: UserInfo,
+  surfers: List[Surfer],
+  countryTypes: List[String],
+  searchForm: Form[views.formdata.SearchFormData])
+
+@Main(page, isLoggedIn, isAdmin, userInfo, countryTypes, searchForm) {
+  <div class="container">
+    <h3>Viewing User: @profileUser.getEmail()</h3>
+  </div>
+}
