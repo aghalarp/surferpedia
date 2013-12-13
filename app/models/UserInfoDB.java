@@ -61,4 +61,21 @@ public class UserInfoDB {
   public static boolean isValid(String email, String password) {
     return (UserInfo.find().where().eq("email", email).where().eq("password", password).findUnique() != null);
   }
+
+  /**
+   * Favorites/Unfavorites the surfer for the current user.
+   * 
+   * @param user User.
+   * @param slug Slug of the surfer.
+   */
+  public static void favoriteSurfer(UserInfo user, String slug) {
+    Surfer surfer = SurferDB.getSurfer(slug);
+    if (!user.getSurfers().contains(surfer)) {
+      user.getSurfers().add(surfer);
+    }
+    else {
+      user.getSurfers().remove(surfer);
+    }
+    user.save();
+  }
 }

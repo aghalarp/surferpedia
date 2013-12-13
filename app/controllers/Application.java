@@ -272,4 +272,24 @@ public class Application extends Controller {
     return ok(ShowUser.render("ShowUser", Secured.isLoggedIn(ctx()), Secured.isAdmin(ctx()),
         Secured.getUserInfo(ctx()), userInfo, SurferDB.random(3), countryTypeList, searchFormData));
   }
+
+  /**
+   * Favorites/Unfavorites the surfer.
+   * 
+   * @param slug   Slug of the Surfer
+   * @param origin The page that invoked this action
+   * @return ShowSurfer or ShowUser page
+   */
+  public static Result favorite(String slug, String origin) {
+    if (Secured.isLoggedIn(ctx()) && !Secured.isAdmin(ctx())) {
+      UserInfoDB.favoriteSurfer(Secured.getUserInfo(ctx()), slug);
+    }
+    System.out.println(origin);
+    if (origin.equals("ShowUser")) {
+      return redirect(routes.Application.getUser(Secured.getUser(ctx())));
+    }
+    else {
+      return redirect(routes.Application.getSurfer(slug));
+    }
+  }
 }

@@ -224,4 +224,11 @@ public class Surfer extends Model {
   public void setCountry(String country) {
     this.country = country;
   }
+
+  /**
+   * @return users.
+   */
+  public List<UserInfo> getUsers() {
+    return this.userInfos;
+  }
 }

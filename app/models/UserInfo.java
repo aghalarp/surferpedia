@@ -28,10 +28,10 @@ public class UserInfo extends Model {
   public static Finder<Long, UserInfo> find() {
     return new Finder<Long, UserInfo>(Long.class, UserInfo.class);
   }
-  
+
   @Id
   private long id;
-  
+
   private String type;
   private String email;
   private String password;
@@ -92,6 +92,13 @@ public class UserInfo extends Model {
    */
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  /**
+   * @return surfers.
+   */
+  public List<Surfer> getSurfers() {
+    return this.surfers;
   }
 
 }

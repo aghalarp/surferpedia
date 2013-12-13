@@ -9,6 +9,26 @@
 
 @Main(page, isLoggedIn, isAdmin, userInfo, countryTypes, searchForm) {
   <div class="container">
-    <h3>Viewing User: @profileUser.getEmail()</h3>
+    <h3>User Profile: @profileUser.getEmail()</h3>
+    
+    <table class="table table-striped table-bordered">
+      <thead>
+        <th>Favorited Surfers</th>
+      </thead>
+      <tbody>
+        @defining(profileUser.getSurfers()) { favoritedSurfers =>
+          @for(surfer <- favoritedSurfers) {
+            <tr>
+              <td>
+                <a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a>
+                @if(profileUser.equals(userInfo)) {
+                  <a class="btn btn-xs btn-warning pull-right" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>
+                }
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
   </div>
 }
