@@ -42,7 +42,7 @@
           
           <ul class="nav navbar-nav">
             @if(isAdmin) {
-              <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()">New Surfer</a></li>
+              <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()"><i class="glyphicon glyphicon-plus"></i> New Surfer</a></li>
             }
             
             <li>
@@ -109,7 +109,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Search</button>
             </div>
           }
         </div><!-- /.modal-content -->
