@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -38,6 +39,7 @@ public class Surfer extends Model {
   private String awards;
   private String carouselImgUrl;
   private String bioImgUrl;
+  @Column(columnDefinition = "TEXT")
   private String biography;
   private String surferType; // Male, Female, or Grom
   private Boolean isEditable = false;
