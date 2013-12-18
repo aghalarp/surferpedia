@@ -88,12 +88,7 @@ public class IndexPage extends FluentPage {
    */
   public List<String> getSearchResultLinkIds() {
     List<String> results = new ArrayList<>();
-    results = find("a").getIds();
-    
-    //Remove first 4 elements, because they are regular page links
-    for(int i=0; i < 4; i++) {
-      results.remove(0);
-    }
+    results = find("table a").getIds();
     
     return results;
   }
