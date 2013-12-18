@@ -1,5 +1,6 @@
 package test;
 
+import java.util.List;
 import org.junit.Test;
 import controllers.Application;
 import play.test.TestBrowser;
@@ -109,6 +110,31 @@ public class IntegrationTest {
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
+      }
+    });
+  }
+  
+  /**
+   * Test that anonymous user can retrieve a surfer page.
+   */
+  @Test
+  public void testRetrieveSurferPage() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        
+        indexPage.searchForm("ad", "", "");
+        
+        List<String> searchResults = indexPage.getSearchResultLinkIds();
+        
+        for(int i=0; i < searchResults.size(); i++) {
+          System.out.println(searchResults.get(i).contains("sadgeg"));
+          assertThat((searchResults.get(i)).contains("sadgeg"));
+        }
+        
       }
     });
   }
