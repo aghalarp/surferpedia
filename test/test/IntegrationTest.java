@@ -8,6 +8,7 @@ import play.libs.F.Callback;
 import test.pages.IndexPage;
 import test.pages.LoginPage;
 import test.pages.SignupPage;
+import test.pages.SurferPage;
 import views.formdata.LoginFormData;
 import static play.test.Helpers.FIREFOX;
 import static play.test.Helpers.inMemoryDatabase;
@@ -126,15 +127,23 @@ public class IntegrationTest {
         browser.goTo(indexPage);
         indexPage.isAt();
         
-        indexPage.searchForm("ad", "", "");
+        //Clicks search form link, fills in with string, hits submit
+        indexPage.searchForm("ad", "male", "allCountries");
         
+        //Check that all search results are valid.
         List<String> searchResults = indexPage.getSearchResultLinkIds();
-        
         for(int i=0; i < searchResults.size(); i++) {
-          System.out.println(searchResults.get(i).contains("sadgeg"));
-          assertThat((searchResults.get(i)).contains("sadgeg"));
+          assertThat(searchResults.get(i)).contains("ad");
         }
         
+        //Click on first surfer link in result page.
+        String surferSlug = indexPage.getFirstSurferId();
+        indexPage.goToSurfer(surferSlug);
+        assertThat(browser.pageSource()).contains("Adriano");
+        
+        //Create new surfer page with given slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
+        surferPage.isAt();
       }
     });
   }
