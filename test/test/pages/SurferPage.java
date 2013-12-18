@@ -2,6 +2,7 @@ package test.pages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 // Although Eclipse marks the following two methods as deprecated, 
@@ -15,20 +16,22 @@ import static org.fest.assertions.Assertions.assertThat;
  * 
  * @author Philip Johnson
  * @author Kevin
+ * @author David
  */
 @SuppressWarnings("unused")
-public class SignupPage extends FluentPage {
+public class SurferPage extends FluentPage {
   private String url;
 
   /**
-   * Create the SignupPage.
+   * Create the IndexPage.
    * 
    * @param webDriver The driver.
    * @param port The port.
+   * @param slug The slug of the surfer.
    */
-  public SignupPage(WebDriver webDriver, int port) {
+  public SurferPage(WebDriver webDriver, int port, String slug) {
     super(webDriver);
-    this.url = "http://localhost:" + port + "/signup";
+    this.url = "http://localhost:" + port + "/surfer/" + slug;
   }
 
   @Override
@@ -38,17 +41,22 @@ public class SignupPage extends FluentPage {
 
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Surferpedia - Signup");
+    assertThat(title()).isEqualTo("Surferpedia - ShowSurfer");
   }
-
-  public void login(String email, String pass) {
-    // Fill the input field with id "email" with the passed name string.
-    fill("#email").with(email);
-    // Fill the input field with id "password" with the passed pass string.
-    fill("#password").with(pass);
-    
-    // Submit the form whose id is "submit"
-    submit("input[type=submit]");
+  
+  /**
+   * Click on login link.
+   */
+  public void goToLogin() {
+    find("#login").click();
+  }
+  
+  /**
+   * Click on signup link.
+   * Remember: Signup link only visible if user is logged out.
+   */
+  public void goToSignup() {
+    find("#signup").click();
   }
   
   /**

@@ -75,8 +75,8 @@ public class IndexPage extends FluentPage {
     }
     
     fill("#name").with(name);
-    //find("select", withId("gender")).find("option", withId(gender)).click();
-    //find("select", withId("country")).find("option", withId(country)).click();
+    find("select", withId("gender")).find("option", withId(gender)).click();
+    find("select", withId("country")).find("option", withId(country)).click();
     
     submit("button[type=submit]");
   }
@@ -93,5 +93,19 @@ public class IndexPage extends FluentPage {
     return results;
   }
   
+  /**
+   * Clicks on the surfer link of the given slug in the search results page.
+   * @param slug The slug of the surfer
+   */
+  public void goToSurfer(String slug) {
+    find("table a", withId(slug)).click();
+  }
   
+  /**
+   * Gets the Id value of the first surfer in the search result page.
+   * @return
+   */
+  public String getFirstSurferId() {
+    return findFirst("table a").getId();
+  }
 }
