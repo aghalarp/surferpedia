@@ -86,7 +86,7 @@
             @defining((i / surfersPerPage) + 1) { page =>
               <tr @if(page > 1) { class="hidden" } data-page="@page">
                 <td><a id="@surfer.getSlug()" href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a></td>
-                <td>@surfer.getBiography()</td>
+                <td>@surfer.getBiography(40)</td>
               </tr> 
             }
           }

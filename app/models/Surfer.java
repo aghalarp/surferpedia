@@ -163,6 +163,17 @@ public class Surfer extends Model {
   public String getBiography() {
     return biography;
   }
+  
+  /**
+   * @param length truncates the biography.
+   * @return the biography.
+   */
+  public String getBiography(int length) {
+    if(length < 0) {
+      return this.biography;
+    }
+    return this.biography.substring(0, length) + (length >= this.biography.length() ? "" : "...");
+  }
 
   /**
    * @param biography the biography to set
