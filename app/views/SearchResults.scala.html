@@ -63,9 +63,10 @@
       <ul class="pagination" data-curr-page="1">
         <li class="prev disabled"><a href="#">&laquo;</a></li>
         <li class="active" data-page="1"><a href="#">1</a></li>
-        
-        @for(i <- 2 to (surfers.length / surfersPerPage) + 1) {
-          <li data-page="@i"><a href="#">@i</a></li>
+        @defining(Math.ceil(1.0 * surfers.length / surfersPerPage).intValue()) { numOfPages =>
+          @for(i <- 2 to numOfPages) {
+            <li data-page="@i"><a href="#">@i</a></li>
+          }
         }
         <li class="next"><a href="#">&raquo;</a></li>
       </ul>
