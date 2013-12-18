@@ -36,7 +36,7 @@ public class LoginPage extends FluentPage {
 
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Login");
+    assertThat(title()).isEqualTo("Surferpedia - Login");
   }
 
   public void login(String email, String pass) {

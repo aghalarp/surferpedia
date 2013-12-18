@@ -13,21 +13,20 @@ import static org.fest.assertions.Assertions.assertThat;
  * 
  * @author Philip Johnson
  * @author Kevin
- * @author David
  */
 @SuppressWarnings("unused")
-public class IndexPage extends FluentPage {
+public class SignupPage extends FluentPage {
   private String url;
 
   /**
-   * Create the IndexPage.
+   * Create the SignupPage.
    * 
    * @param webDriver The driver.
    * @param port The port.
    */
-  public IndexPage(WebDriver webDriver, int port) {
+  public SignupPage(WebDriver webDriver, int port) {
     super(webDriver);
-    this.url = "http://localhost:" + port;
+    this.url = "http://localhost:" + port + "/signup";
   }
 
   @Override
@@ -37,21 +36,16 @@ public class IndexPage extends FluentPage {
 
   @Override
   public void isAt() {
-    assertThat(title()).isEqualTo("Surferpedia - Home");
+    assertThat(title()).isEqualTo("Surferpedia - Signup");
   }
-  
-  /**
-   * Click on login link.
-   */
-  public void goToLogin() {
-    find("#login").click();
-  }
-  
-  /**
-   * Click on signup link.
-   * Remember: Signup link only visible if user is logged out.
-   */
-  public void goToSignup() {
-    find("#signup").click();
+
+  public void login(String email, String pass) {
+    // Fill the input field with id "email" with the passed name string.
+    fill("#email").with(email);
+    // Fill the input field with id "password" with the passed pass string.
+    fill("#password").with(pass);
+    
+    // Submit the form whose id is "submit"
+    submit("input[type=submit]");
   }
 }

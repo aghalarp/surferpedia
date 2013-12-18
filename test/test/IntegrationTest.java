@@ -6,8 +6,9 @@ import play.test.TestBrowser;
 import play.libs.F.Callback;
 import test.pages.IndexPage;
 import test.pages.LoginPage;
+import test.pages.SignupPage;
 import views.formdata.LoginFormData;
-import static play.test.Helpers.HTMLUNIT;
+import static play.test.Helpers.FIREFOX;
 import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.testServer;
@@ -26,7 +27,7 @@ public class IntegrationTest {
    */
   @Test
   public void testIndex() {
-    running(testServer(PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
         IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
         browser.goTo(indexPage);
@@ -40,7 +41,7 @@ public class IntegrationTest {
    */
   @Test
   public void testLogin() {
-    running(testServer(PORT, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
         LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
         browser.goTo(loginPage);
@@ -53,6 +54,61 @@ public class IntegrationTest {
         // test correct logins
         loginPage.login(Application.adminEmail, Application.adminPassword);
         assertThat(browser.pageSource()).contains(Application.adminEmail);
+      }
+    });
+  }
+  
+  /**
+   * Test that signup page is retrievable.
+   */
+  @Test
+  public void testRetrieveSignupPage() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+      }
+    });
+  }
+  
+  /**
+   * Test that user can successfully sign up.
+   */
+  @Test
+  public void testSignup() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+        
+        //Fill in signup form and submit
+        signupPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("Signup successful.");
+        
+        //Goto login page.
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        loginPage.isAt();
+        
+        //Sign in with new account.
+        loginPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("test@hawaii.edu");
       }
     });
   }
