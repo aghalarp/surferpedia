@@ -200,5 +200,64 @@ public class IntegrationTest {
         assertThat(browser.pageSource()).contains(surferName);
       }
     });
+  } 
+  
+  /**
+   * Test that a user can create an account, login, add a user to favorites, and remove the surfer.
+   */
+  @Test
+  public void testRemoveSurferFromFavorites() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) throws InterruptedException {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+        
+        //Fill in signup form and submit
+        signupPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("Signup successful.");
+        
+        //Goto login page.
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        loginPage.isAt();
+        
+        //Sign in with new account.
+        loginPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("test@hawaii.edu");
+        
+        //Clicks search form link, fills in with string, hits submit
+        indexPage.searchForm("", "male", "allCountries");
+        
+        //Click on first surfer link in result page.
+        String surferSlug = indexPage.getFirstSurferId();
+        indexPage.goToSurfer(surferSlug);
+        
+        //Create new surfer page with given slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
+        surferPage.isAt();
+        
+        // Add the surfer to favorites
+        String surferName = surferPage.getSurferName();
+        surferPage.addToFavorites();
+        
+        // Check that the surfer was added
+        surferPage.goToProfile();
+        assertThat(browser.pageSource()).contains(surferName);
+        
+        // remove from favorites
+        surferPage.findFirst("tr[data-slug=" + surferSlug + "] .remove-from-favorites").click();
+        
+        // Check that the surfer was removed
+        assertThat(browser.pageSource()).doesNotContain(surferName);
+      }
+    });
   }
 }

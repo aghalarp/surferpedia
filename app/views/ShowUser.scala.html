@@ -18,11 +18,11 @@
       <tbody>
         @defining(profileUser.getSurfers()) { favoritedSurfers =>
           @for(surfer <- favoritedSurfers) {
-            <tr>
+            <tr data-slug="@surfer.getSlug()">
               <td>
                 <a href="@routes.Application.getSurfer(surfer.getSlug())">@surfer.getName()</a>
                 @if(profileUser.equals(userInfo)) {
-                  <a class="btn btn-xs btn-warning pull-right" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>
+                  <a class="remove-from-favorites btn btn-xs btn-warning pull-right" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>
                 }
               </td>
             </tr>
