@@ -176,7 +176,7 @@ public class IntegrationTest {
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
         try {
-          Thread.sleep(2000);
+          Thread.sleep(5000);
         }
         catch (InterruptedException e) {
           // TODO Auto-generated catch block
@@ -191,6 +191,13 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, fills in with string, hits submit
@@ -200,7 +207,7 @@ public class IntegrationTest {
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
         try {
-          Thread.sleep(2000);
+          Thread.sleep(5000);
         }
         catch (InterruptedException e) {
           // TODO Auto-generated catch block
@@ -219,7 +226,7 @@ public class IntegrationTest {
         // Check that the surfer was added
         surferPage.goToProfile();
         try {
-          Thread.sleep(2000);
+          Thread.sleep(5000);
         }
         catch (InterruptedException e) {
           // TODO Auto-generated catch block
@@ -250,6 +257,13 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -259,6 +273,13 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, fills in with string, hits submit
@@ -278,12 +299,26 @@ public class IntegrationTest {
         
         // Check that the surfer was added
         surferPage.goToProfile();
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains(surferName);
         
         // remove from favorites
         surferPage.findFirst("tr[data-slug=" + surferSlug + "] .remove-from-favorites").click();
         
         // Check that the surfer was removed
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).doesNotContain(surferName);
       }
     });
