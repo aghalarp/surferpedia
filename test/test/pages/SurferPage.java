@@ -58,4 +58,18 @@ public class SurferPage extends BasePage {
   public String getSurferName() {
     return findFirst("h1").getText();
   }
+  
+  /**
+   * Clicks the edit surfer button.
+   */
+  public void goToEditSurfer() {
+    find("#editLink").click();
+  }
+  
+  /**
+   * Clicks the delete surfer button.
+   */
+  public void ClickDeleteSurfer() {
+    find("#deleteLink").click();
+  }
 }

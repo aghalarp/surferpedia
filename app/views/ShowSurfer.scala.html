@@ -19,8 +19,8 @@
           <p><strong>Country: </strong>@surfer.getCountry()</p>
           <p>
           @if(isLoggedIn) {
-            <a class="btn btn-xs btn-info" href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
-            <a class="btn btn-xs btn-danger" data-toggle="modal" href="#deleteDialog"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+            <a id="editLink" class="btn btn-xs btn-info" href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a>
+            <a id="deleteLink" class="btn btn-xs btn-danger" data-toggle="modal" href="#deleteDialog"><i class="glyphicon glyphicon-remove"></i> Delete</a>
             @if(!isAdmin) {
               @if(userInfo.getSurfers().contains(surfer)) {
                 <a id="remove-from-favories" class="btn btn-xs btn-warning" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>

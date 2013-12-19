@@ -5,6 +5,7 @@ import org.junit.Test;
 import controllers.Application;
 import play.test.TestBrowser;
 import play.libs.F.Callback;
+import test.pages.EditSurferPage;
 import test.pages.IndexPage;
 import test.pages.LoginPage;
 import test.pages.NewSurferPage;
@@ -422,7 +423,7 @@ public class IntegrationTest {
   /**
    * Test that an admin can successfully create a new surfer.
    */
-  @Test
+  //@Test
   public void testCreateSurfer() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -465,4 +466,89 @@ public class IntegrationTest {
       }
     });
   }
+  
+  /**
+   * Test that a newly created user can edit an existing surfer.
+   */
+  @Test
+  public void testEditSurfer() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) throws InterruptedException {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+        
+        //Fill in signup form and submit
+        signupPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("Signup successful.");
+        
+        //Goto login page.
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        loginPage.isAt();
+        
+        //Sign in with new account.
+        loginPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("test@hawaii.edu");
+        
+        //Clicks search form link, fills in with string, hits submit
+        indexPage.searchForm("Kelly Slater", "male", "USA");
+        
+        //Click on first surfer link in result page.
+        String surferSlug = indexPage.getFirstSurferId();
+        indexPage.goToSurfer(surferSlug);
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("Kelly");
+        
+        //Create new surfer page with given slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
+        surferPage.isAt();
+        surferPage.goToEditSurfer();
+        
+        EditSurferPage editSurferPage = new EditSurferPage(browser.getDriver(), PORT, surferSlug);
+        editSurferPage.fillSurferForm("Bob Loblaw", "Indiana", "Best Lawyer", "http://www.shareyourride.net/images/Its_Never_Too_Late_To_Become_A_Surfer_Dude/Really_Big_Wave.jpg", "http://static.tvfanatic.com/images/gallery/bob-loblaw-pic_200x221.png", "Bob Loblaw is a lawyer from the TV show Arrested Development.", "Male", "Goofy", "USA");
+        
+        //Create new surfer page with new slug and confirm current location.
+        SurferPage surferPageCheck = new SurferPage(browser.getDriver(), PORT, "kellyslater");
+        
+        assertThat(browser.pageSource()).contains("kellyslater");
+        assertThat(browser.pageSource()).contains("Bob Loblaw");
+        assertThat(browser.pageSource()).contains("Indiana");
+        assertThat(browser.pageSource()).contains("Best Lawyer");
+        assertThat(browser.pageSource()).contains("http://www.shareyourride.net/images/Its_Never_Too_Late_To_Become_A_Surfer_Dude/Really_Big_Wave.jpg");
+        assertThat(browser.pageSource()).contains("http://static.tvfanatic.com/images/gallery/bob-loblaw-pic_200x221.png");
+        assertThat(browser.pageSource()).contains("Bob Loblaw is a lawyer from the TV show Arrested Development.");
+        assertThat(browser.pageSource()).contains("Male");
+        assertThat(browser.pageSource()).contains("Goofy");
+        assertThat(browser.pageSource()).contains("USA");
+      }
+    });
+  } 
 }
