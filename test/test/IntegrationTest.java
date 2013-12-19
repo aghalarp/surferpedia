@@ -323,4 +323,48 @@ public class IntegrationTest {
       }
     });
   }
+  
+  /**
+   * Test that anonymous user cannot edit or delete a surfer.
+   */
+  @Test
+  public void testCannotEditDeleteSurferPage() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        
+        //Clicks search form link, fills in form, hits submit
+        indexPage.searchForm("adriano", "male", "Brazil");
+        
+        //Check that all search results are valid.
+        List<String> searchResults = indexPage.getSearchResultLinkIds();
+        for(int i=0; i < searchResults.size(); i++) {
+          assertThat(searchResults.get(i)).contains("adriano");
+        }
+        
+        //Click on first surfer link in result page.
+        String surferSlug = indexPage.getFirstSurferId();
+        indexPage.goToSurfer(surferSlug);
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("Adriano");
+        
+        //Create new surfer page with given slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
+        surferPage.isAt();
+        
+        //Check that edit and delete buttons are unavailable.
+        assertThat(browser.pageSource()).doesNotContain("Edit");
+        assertThat(browser.pageSource()).doesNotContain("Delete");
+      }
+    });
+  }
 }
