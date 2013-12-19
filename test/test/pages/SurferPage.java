@@ -19,8 +19,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * @author David
  */
 @SuppressWarnings("unused")
-public class SurferPage extends FluentPage {
-  private String url;
+public class SurferPage extends BasePage {
 
   /**
    * Create the IndexPage.
@@ -30,13 +29,7 @@ public class SurferPage extends FluentPage {
    * @param slug The slug of the surfer.
    */
   public SurferPage(WebDriver webDriver, int port, String slug) {
-    super(webDriver);
-    this.url = "http://localhost:" + port + "/surfer/" + slug;
-  }
-
-  @Override
-  public String getUrl() {
-    return this.url;
+    super(webDriver, "http://localhost", port, "/surfer/" + slug);
   }
 
   @Override
@@ -45,68 +38,24 @@ public class SurferPage extends FluentPage {
   }
   
   /**
-   * Click on login link.
+   * Adds the surfer to favorites.
    */
-  public void goToLogin() {
-    find("#login").click();
+  public void addToFavorites() {
+    find("#add-to-favorites").click();
   }
   
   /**
-   * Click on signup link.
-   * Remember: Signup link only visible if user is logged out.
+   * Removes the surfer from favorites.
    */
-  public void goToSignup() {
-    find("#signup").click();
+  public void removeFromFavorites() {
+    find("#remove-from-favorites").click();
   }
   
   /**
-   * Clicks the search link to bring up the search modal window, fill it in and submits the form.
-   * 
+   * Retrieves the surfer's name.
+   * @return the surfer's name.
    */
-  public void searchForm(String name, String gender, String country) {
-    find("#searchLink").click();
-    
-    //This is needed because the modal fade-in time screws things up with fluentlenium.
-    try {
-      Thread.sleep(2000);
-    }
-    catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    
-    fill("#name").with(name);
-    find("select", withId("gender")).find("option", withId(gender)).click();
-    find("select", withId("country")).find("option", withId(country)).click();
-    
-    submit("button[type=submit]");
-  }
-  
-  /**
-   * Finds all link id values in current page source.
-   * 
-   * @return A list of all link id values
-   */
-  public List<String> getSearchResultLinkIds() {
-    List<String> results = new ArrayList<>();
-    results = find("table a").getIds();
-    
-    return results;
-  }
-  
-  /**
-   * Clicks on the surfer link of the given slug in the search results page.
-   * @param slug The slug of the surfer
-   */
-  public void goToSurfer(String slug) {
-    find("table a", withId(slug)).click();
-  }
-  
-  /**
-   * Gets the Id value of the first surfer in the search result page.
-   * @return
-   */
-  public String getFirstSurferId() {
-    return findFirst("table a").getId();
+  public String getSurferName() {
+    return findFirst("h1").getText();
   }
 }

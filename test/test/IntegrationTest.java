@@ -147,4 +147,58 @@ public class IntegrationTest {
       }
     });
   }
+  
+  /**
+   * Test that a user can create an account, login, and add a user to favorites.
+   */
+  @Test
+  public void testAddSurferToFavorites() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) throws InterruptedException {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+        
+        //Fill in signup form and submit
+        signupPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("Signup successful.");
+        
+        //Goto login page.
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        loginPage.isAt();
+        
+        //Sign in with new account.
+        loginPage.login("test@hawaii.edu", "password123");
+        assertThat(browser.pageSource()).contains("test@hawaii.edu");
+        
+        //Clicks search form link, fills in with string, hits submit
+        indexPage.searchForm("ad", "male", "allCountries");
+        
+        //Click on first surfer link in result page.
+        String surferSlug = indexPage.getFirstSurferId();
+        indexPage.goToSurfer(surferSlug);
+        assertThat(browser.pageSource()).contains("Adriano");
+        
+        //Create new surfer page with given slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
+        surferPage.isAt();
+        
+        // Add the surfer to favorites
+        String surferName = surferPage.getSurferName();
+        surferPage.addToFavorites();
+        
+        // Check that the surfer was added
+        surferPage.goToProfile();
+        assertThat(browser.pageSource()).contains(surferName);
+      }
+    });
+  }
 }

@@ -23,9 +23,9 @@
             <a class="btn btn-xs btn-danger" data-toggle="modal" href="#deleteDialog"><i class="glyphicon glyphicon-remove"></i> Delete</a>
             @if(!isAdmin) {
               @if(userInfo.getSurfers().contains(surfer)) {
-                <a class="btn btn-xs btn-warning" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>
+                <a id="remove-from-favories" class="btn btn-xs btn-warning" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-down"></i> Remove from Favorites</a>
               } else {
-                <a class="btn btn-xs btn-primary" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-up"></i> Add to Favorites</a>
+                <a id="add-to-favorites" class="btn btn-xs btn-primary" href="@routes.Application.favorite(surfer.getSlug(), page)"><i class="glyphicon glyphicon-thumbs-up"></i> Add to Favorites</a>
               }
             }
           }
