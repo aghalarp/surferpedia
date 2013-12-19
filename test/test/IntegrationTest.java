@@ -139,6 +139,13 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
+        try {
+          Thread.sleep(2000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("Adriano");
         
         //Create new surfer page with given slug and confirm current location.
@@ -168,6 +175,13 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(2000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -185,6 +199,13 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
+        try {
+          Thread.sleep(2000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains("Adriano");
         
         //Create new surfer page with given slug and confirm current location.
@@ -197,6 +218,13 @@ public class IntegrationTest {
         
         // Check that the surfer was added
         surferPage.goToProfile();
+        try {
+          Thread.sleep(2000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         assertThat(browser.pageSource()).contains(surferName);
       }
     });
