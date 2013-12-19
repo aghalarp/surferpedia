@@ -66,6 +66,14 @@ public class BasePage extends FluentPage {
   }
   
   /**
+   * Click on New Surfer link.
+   * Remember: New Surfer link only visible if admin user is logged in.
+   */
+  public void goToNewSurfer() {
+    findFirst("#newSurfer").click();
+  }
+  
+  /**
    * Clicks the search link to bring up the search modal window, fill it in and submits the form.
    */
   public void searchForm(String name, String gender, String country) {

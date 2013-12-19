@@ -42,7 +42,7 @@
           
           <ul class="nav navbar-nav">
             @if(isAdmin) {
-              <li class="@("active".when(page == "NewSurfer"))"><a href="@routes.Application.newSurfer()"><i class="glyphicon glyphicon-plus"></i> New Surfer</a></li>
+              <li class="@("active".when(page == "NewSurfer"))"><a id="newSurfer" href="@routes.Application.newSurfer()"><i class="glyphicon glyphicon-plus"></i> New Surfer</a></li>
             }
             
             <li>
