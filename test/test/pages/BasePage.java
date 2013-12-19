@@ -74,6 +74,13 @@ public class BasePage extends FluentPage {
   }
   
   /**
+   * Click on the homepage link.
+   */
+  public void goToIndex() {
+    findFirst("#homePage").click();
+  }
+  
+  /**
    * Clicks the search link to bring up the search modal window, fill it in and submits the form.
    */
   public void searchForm(String name, String gender, String country) {

@@ -35,7 +35,7 @@ public class NewSurferPage extends BasePage {
   }
   
   public void fillSurferForm(String slug, String name, String home, String awards, String carouselImgUrl, String bioImgUrl,
-      String biography, String surferType, String footstyleType, String country) throws InterruptedException {
+      String biography, String surferType, String footstyleType, String country) {
     
     fill("#slug").with(slug);
     fill("#name").with(name);
@@ -47,8 +47,9 @@ public class NewSurferPage extends BasePage {
     find("select", withId("surferType")).find("option", withText().equalTo(surferType)).click();
     find("div", withId("footstyleTypes")).findFirst("input", withId(footstyleType)).click();
     fill("#country").with(country);
-    System.out.println(findFirst("form"));
-    findFirst("form").submit();
+    //System.out.println(findFirst("form"));
+    //findFirst("form").submit();
+    submit("#submitSurfer");
   }
   
   public void login(String email, String pass) {

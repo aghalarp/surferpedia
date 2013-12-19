@@ -448,24 +448,9 @@ public class IntegrationTest {
         newSurferPage.isAt();
         newSurferPage.fillSurferForm("david", "David Smith", "New York", "Best Looking Dude 2009", "http://www.shareyourride.net/images/Its_Never_Too_Late_To_Become_A_Surfer_Dude/Really_Big_Wave.jpg", "http://i30.photobucket.com/albums/c324/ShatteredDaisy/urbantease/inspiration/freda08.jpg", "David is one awesome guy!", "Male", "Goofy", "USA");
         
-        // Click search form and fill in relevant info.
-        newSurferPage.searchForm("David Smith", "male", "USA");
         
-        //Click on first surfer link in result page.
-        String surferSlug = newSurferPage.getFirstSurferId();
-        newSurferPage.goToSurfer(surferSlug);
-        
-        //Create new surfer page with given slug and confirm current location.
-        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, surferSlug);
-        surferPage.isAt();
-        
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
+        //Create new surfer page with new slug and confirm current location.
+        SurferPage surferPage = new SurferPage(browser.getDriver(), PORT, "david");
         
         assertThat(browser.pageSource()).contains("david");
         assertThat(browser.pageSource()).contains("David Smith");
