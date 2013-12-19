@@ -29,7 +29,7 @@ public class IntegrationTest {
   /**
    * Test that makes sure the Index page is retrievable.
    */
-  //@Test
+  @Test
   public void testIndex() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -43,7 +43,7 @@ public class IntegrationTest {
   /**
    * Login test that logs in.
    */
-  //@Test
+  @Test
   public void testLogin() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -65,7 +65,7 @@ public class IntegrationTest {
   /**
    * Test that signup page is retrievable.
    */
-  //@Test
+  @Test
   public void testRetrieveSignupPage() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -86,7 +86,7 @@ public class IntegrationTest {
   /**
    * Test that user can successfully sign up.
    */
-  //@Test
+  @Test
   public void testSignup() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -120,7 +120,7 @@ public class IntegrationTest {
   /**
    * Test that anonymous user can retrieve a surfer page.
    */
-  //@Test
+  @Test
   public void testRetrieveSurferPage() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -141,13 +141,6 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
-        try {
-          Thread.sleep(2000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Adriano");
         
         //Create new surfer page with given slug and confirm current location.
@@ -160,7 +153,7 @@ public class IntegrationTest {
   /**
    * Test that a user can create an account, login, and add a user to favorites.
    */
-  //@Test
+  @Test
   public void testAddSurferToFavorites() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) throws InterruptedException {
@@ -177,13 +170,6 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -193,13 +179,6 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, fills in with string, hits submit
@@ -208,13 +187,6 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Adriano");
         
         //Create new surfer page with given slug and confirm current location.
@@ -227,13 +199,6 @@ public class IntegrationTest {
         
         // Check that the surfer was added
         surferPage.goToProfile();
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains(surferName);
       }
     });
@@ -242,7 +207,7 @@ public class IntegrationTest {
   /**
    * Test that a user can create an account, login, add a user to favorites, and remove the surfer.
    */
-  //@Test
+  @Test
   public void testRemoveSurferFromFavorites() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) throws InterruptedException {
@@ -259,13 +224,6 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -275,13 +233,6 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, fills in with string, hits submit
@@ -301,26 +252,12 @@ public class IntegrationTest {
         
         // Check that the surfer was added
         surferPage.goToProfile();
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains(surferName);
         
         // remove from favorites
         surferPage.findFirst("tr[data-slug=" + surferSlug + "] .remove-from-favorites").click();
         
         // Check that the surfer was removed
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).doesNotContain(surferName);
       }
     });
@@ -329,7 +266,7 @@ public class IntegrationTest {
   /**
    * Test that anonymous user cannot edit or delete a surfer.
    */
-  //@Test
+  @Test
   public void testCannotEditDeleteSurferPage() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -350,13 +287,6 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Adriano");
         
         //Create new surfer page with given slug and confirm current location.
@@ -373,7 +303,7 @@ public class IntegrationTest {
   /**
    * Test that a regular user cannot create a new surfer.
    */
-  //@Test
+  @Test
   public void testCannotCreateNewSurfer() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) throws InterruptedException {
@@ -390,13 +320,6 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -406,13 +329,6 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         assertThat(browser.pageSource()).doesNotContain("New Surfer");
@@ -423,7 +339,7 @@ public class IntegrationTest {
   /**
    * Test that an admin can successfully create a new surfer.
    */
-  //@Test
+  @Test
   public void testCreateSurfer() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) {
@@ -470,7 +386,7 @@ public class IntegrationTest {
   /**
    * Test that a newly created user can edit an existing surfer.
    */
-  //@Test
+  @Test
   public void testEditSurfer() {
     running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
       public void invoke(TestBrowser browser) throws InterruptedException {
@@ -487,13 +403,6 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -503,13 +412,6 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, fills in with string, hits submit
@@ -518,13 +420,6 @@ public class IntegrationTest {
         //Click on first surfer link in result page.
         String surferSlug = indexPage.getFirstSurferId();
         indexPage.goToSurfer(surferSlug);
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Kelly");
         
         //Create new surfer page with given slug and confirm current location.
@@ -572,13 +467,6 @@ public class IntegrationTest {
         
         //Fill in signup form and submit
         signupPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("Signup successful.");
         
         //Goto login page.
@@ -588,26 +476,14 @@ public class IntegrationTest {
         
         //Sign in with new account.
         loginPage.login("test@hawaii.edu", "password123");
-        try {
-          Thread.sleep(5000);
-        }
-        catch (InterruptedException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
         assertThat(browser.pageSource()).contains("test@hawaii.edu");
         
         //Clicks search form link, surfer name left blank so we get all surfers, hits submit
         indexPage.searchForm("", "allGenders", "allCountries");
         
         //Check that all search results are valid.
-        int surferCount = 0;
         final int SURFERCOUNTMAX = 15;
-        List<String> searchResults = indexPage.getSearchResultLinkIds();
-        for(int i=0; i < searchResults.size(); i++) {
-          surferCount++;
-        }
-        assertThat(surferCount).isEqualTo(SURFERCOUNTMAX);
+        assertThat(indexPage.find("table.table tbody tr:not(.hidden)").size()).isLessThanOrEqualTo(SURFERCOUNTMAX);
       }
     });
   } 
