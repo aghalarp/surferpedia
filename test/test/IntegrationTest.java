@@ -367,4 +367,54 @@ public class IntegrationTest {
       }
     });
   }
+  
+  /**
+   * Test that a regular user cannot create a new surfer.
+   */
+  @Test
+  public void testCannotCreateNewSurfer() {
+    running(testServer(PORT, fakeApplication(inMemoryDatabase())), FIREFOX, new Callback<TestBrowser>() {
+      public void invoke(TestBrowser browser) throws InterruptedException {
+        //Start at homepage.
+        IndexPage indexPage = new IndexPage(browser.getDriver(), PORT);
+        browser.goTo(indexPage);
+        indexPage.isAt();
+        indexPage.goToSignup();
+        
+        //Goto sign up page.
+        SignupPage signupPage = new SignupPage(browser.getDriver(), PORT);
+        browser.goTo(signupPage);
+        signupPage.isAt();
+        
+        //Fill in signup form and submit
+        signupPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("Signup successful.");
+        
+        //Goto login page.
+        LoginPage loginPage = new LoginPage(browser.getDriver(), PORT);
+        browser.goTo(loginPage);
+        loginPage.isAt();
+        
+        //Sign in with new account.
+        loginPage.login("test@hawaii.edu", "password123");
+        try {
+          Thread.sleep(5000);
+        }
+        catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        assertThat(browser.pageSource()).contains("test@hawaii.edu");
+        
+        assertThat(browser.pageSource()).doesNotContain("New Surfer");
+      }
+    });
+  }
 }
